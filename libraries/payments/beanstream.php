@@ -68,7 +68,7 @@ class Beanstream
 	public function __construct($payments)
 	{
 		$this->payments = $payments;
-		$this->_api_endpoint = $this->payments->ci->config->item('api_endpoint');		
+		$this->_api_endpoint = $this->payments->config->item('api_endpoint');		
 		$this->_api_settings = array(
 			'merchant_id'	=> (isset($payments->gateway_credentials)) ? $payments->gateway_credentials['api_mid'] : $this->payments->config->module['api_mid'],
 			'username'		=> (isset($payments->gateway_credentials)) ? $payments->gateway_credentials['api_username'] : $this->payments->config->module['api_username'],
@@ -84,9 +84,9 @@ class Beanstream
 
 	private function _recurring_settings()
 	{
-		$this->_api_endpoint = $this->payments->ci->config->item('api_recurring_endpoint');
-		$this->_api_settings['passCode'] = $this->payments->ci->config->item('api_recurring_billing_passcode');
-		$this->_api_settings['merchantId'] = $this->payments->ci->config->item('api_mid');
+		$this->_api_endpoint = $this->payments->config->module['api_recurring_endpoint'];
+		$this->_api_settings['passCode'] = $this->payments->config->module['api_recurring_billing_passcode'];
+		$this->_api_settings['merchantId'] = $this->payments->config->module['api_mid'];
 		$this->_api_settings['serviceVersion'] = "1.0";
 		$this->_api_settings = array_reverse($this->_api_settings);
 		unset($this->_api_settings['username']);
@@ -131,8 +131,8 @@ class Beanstream
 				$request['rbBillingIncrement'] = $params['billing_frequency'];
 			}
 			
-			$request['rbCharge'] = $this->payments->ci->config->item('delay_charge');
-			$request['processBackPayments'] = $this->payments->ci->config->item('bill_outstanding');
+			$request['rbCharge'] = $this->payments->config->module['delay_charge'];
+			$request['processBackPayments'] = $this->payments->config->module['bill_outstanding'];
 			
 			if(isset($params['profile_start_date']))
 			{
@@ -156,7 +156,7 @@ class Beanstream
 		if($transaction_type === 'recurring_modify' OR $transaction_type === 'recurring_cancel' OR $transaction_type === 'recurring_suspend' OR $transaction_type === 'recurring_activate')
 		{
 			$request['rbAccountID'] = $params['identifier'];
-			$request['processBackPayments'] = $this->payments->ci->config->item('bill_outstanding');
+			$request['processBackPayments'] = $this->payments->config->module['bill_outstanding'];
 		}
 		
 		if($transaction_type === 'recurring_suspend')
@@ -312,8 +312,8 @@ class Beanstream
 
 		if(isset($this->_validation['username'], $this->_validation['password']))
 		{
-			$request['username'] = $this->payments->ci->config->item('validation_username');
-			$request['password'] = $this->payments->ci->config->item('validation_password');
+			$request['username'] = $this->payments->config->module['validation_username'];
+			$request['password'] = $this->payments->config->module['validation_password'];
 		}				
 		
 		return $request;
@@ -356,8 +356,8 @@ class Beanstream
 		$this->_build_request($params);	
 		if(isset($this->_validation['username'], $this->_validation['password']))
 		{
-			$this->_request['username'] = $this->payments->ci->config->item('validation_username');
-			$this->_request['password'] = $this->payments->ci->config->item('validation_password');
+			$this->_request['username'] = $this->payments->config->module['validation_username'];
+			$this->_request['password'] = $this->payments->config->module['validation_password'];
 		}	
 		return $this->_handle_query();
 	}

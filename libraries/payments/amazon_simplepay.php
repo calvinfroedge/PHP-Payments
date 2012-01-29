@@ -133,8 +133,6 @@ class Amazon_SimplePay
 		
 		$this->_api_settings['processImmediate'] = $capture_method;
 		
-		$this->payments->ci->load->helper('form');
-		
 		$fields = array_merge($fields, $this->_api_settings);
 		
 		$submit = array(

@@ -648,10 +648,6 @@ class Payments
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_HEADER, 0);
 
-		/*
-		$this->ci->curl->create($query_string);	
-		$this->ci->curl->option('FAILONERROR', FALSE);
-		*/
 		if(is_null($payload))
 		{
 			$request = curl_exec($curl);
