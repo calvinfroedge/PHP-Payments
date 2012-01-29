@@ -2,7 +2,7 @@
 
 # PHP Payments
 
-## NOTICE - USING CODEIGNITER-PAYMENTS ALONE DOES NOT MAKE YOU PCI COMPLIANT
+## NOTICE - USING PHP-PAYMENTS ALONE DOES NOT MAKE YOU PCI COMPLIANT
 
 It is highly recommended that you attempt to architect your application to achieve some level of PCI compliance.  Without this, the applications you create can be vulnerable to fines for PCI compliance violations.  Using codeigniter-payments does not circumvent the need for you to do this.  You can check out the PCI compliance self assessment form here: https://www.pcisecuritystandards.org/merchants/self_assessment_form.php
 
@@ -61,7 +61,7 @@ An important parameter, that you will use often, is 'identifier.'  'Identifier' 
 Examples for all gateways are available in /examples.  A request is formatted thusly:
 
 ```php
-$this->payments->payment_action('gateway_name', $params);
+$payments->payment_action('gateway_name', $params);
 ```
 
 ## Responses
@@ -78,7 +78,7 @@ There are two types of responses returned, local responses and gateway responses
 Access response properties by naming your call something like this:
 
 ```php
-$response = $this->payments->payment_action('gateway_name', $params); 
+$response = $payments->payment_action('gateway_name', $params); 
 ```
 
 Then you can do:
