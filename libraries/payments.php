@@ -74,11 +74,20 @@ class Payments
 	/**
 	 * The constructor function.
 	 */	
-	public function __construct()
+	public function __construct($config = null)
 	{
 		//Load some configs
 		$this->config = new stdClass();
 		$this->config->main = $this->_load('config', 'payments');
+
+		//Reset main config if override values were passed in constructor
+		if(!is_null($config))
+		{
+			foreach($config as $k=>$v)
+			{
+				$this->config->main[$k] = $v;
+			}
+		}
 
 		$this->mode = $this->config->main['payments_mode'];
 		$this->_response_codes = $this->config->main['response_codes'];
@@ -212,7 +221,7 @@ class Payments
 			if(isset($params['gateway_credentials'])) //This for backwards compatability, now deprecated
 			{
 				$config = $params['gateway_credentials'];
-				unset($params['gateway_credentials'];
+				unset($params['gateway_credentials']);
 			}
 
 			if(!is_null($config))
