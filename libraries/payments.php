@@ -148,7 +148,17 @@ class Payments
 		
 		if($supported)
 		{
-			$response = $this->_make_gateway_call($params[0], $method, $params[1]);
+			$gateway = $params[0];
+			$args = $params[1];
+			if(isset($params[2]))
+			{
+				$config = $params[2];
+				$response = $this->_make_gateway_call($gateway, $method, $args, $config);
+			}
+			else
+			{
+				$response = $this->_make_gateway_call($gateway, $method, $args);
+			}
 		}
 		else
 		{
@@ -181,7 +191,7 @@ class Payments
 	 * @param	array	Params to submit to the payment module
 	 * @return	object	Should return a success or failure, along with a response.
 	 */	
-	private function _make_gateway_call($payment_module, $payment_type, $params)
+	private function _make_gateway_call($payment_module, $payment_type, $params, $config = null)
 	{	
 		$module_exists = $this->_load('library', 'payments/'.$payment_module);
 
@@ -199,10 +209,15 @@ class Payments
 
 			$this->payment_type = $payment_type;
 			
-			if(isset($params['gateway_credentials']))
+			if(isset($params['gateway_credentials'])) //This for backwards compatability, now deprecated
 			{
-				$this->gateway_credentials = $params['gateway_credentials'];
-				unset($params['gateway_credentials']);
+				$config = $params['gateway_credentials'];
+				unset($params['gateway_credentials'];
+			}
+
+			if(!is_null($config))
+			{
+				$this->gateway_credentials = $config;
 			}
 				
 			$valid_inputs = $this->_check_inputs($payment_module, $params);

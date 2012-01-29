@@ -8,7 +8,7 @@ class Eway
 	*/		
 	public function __construct($payments)
 	{
-		$this->payments = $payments;				
+		$this->payments = $payments;
 		$this->_api_endpoint = $this->payments->config->module['api_endpoint'.'_'.$this->payments->mode];		
 		$this->_api_settings = array(
 			'api_cid'		=> (isset($payments->gateway_credentials)) ? $payments->gateway_credentials['api_cid'] : $this->payments->config->module['api_cid'],
@@ -117,7 +117,6 @@ class Eway
 	 */		
 	private function _handle_query()
 	{	
-		//var_dump($this->_request);exit;
 		$this->_http_query = $this->_request;
 
 		$response_object = $this->payments->gateway_request($this->_api_endpoint, $this->_http_query);	
