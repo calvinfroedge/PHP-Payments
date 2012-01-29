@@ -183,7 +183,7 @@ class Payments
 	 */	
 	private function _make_gateway_call($payment_module, $payment_type, $params)
 	{	
-		$module_exists = $this->_load_module($payment_module);
+		$module_exists = $this->_load('library', 'payments/'.$payment_module);
 
 		if($module_exists === FALSE)
 		{
@@ -252,24 +252,6 @@ class Payments
 				)
 			);						
 		}
-	}
-
-	/**
-	 * Try to load a payment module
-	 *
-	 * @param	string	The payment module to load
-	 * @return	mixed	Will return bool if file is not found.  Will return file as object if found.
-	 */		
-	private function _load_module($payment_module)
-	{
-		$module = dirname(__FILE__).'/payments/'.$payment_module.'.php';
-		if (!is_file($module))
-		{
-			return FALSE;
-		}
-		ob_start();
-		include $module;
-		return ob_get_clean();
 	}
 
 	/**

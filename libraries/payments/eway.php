@@ -9,15 +9,12 @@ class Eway
 	public function __construct($payments)
 	{
 		$this->payments = $payments;				
-		$this->_default_params = $this->payments->config->module['method_params');
 		$this->_api_endpoint = $this->payments->config->module['api_endpoint'.'_'.$this->payments->mode];		
 		$this->_api_settings = array(
 			'api_cid'		=> (isset($payments->gateway_credentials)) ? $payments->gateway_credentials['api_cid'] : $this->payments->config->module['api_cid'],
-			'api_endpoint'	=> $this->payments->config->module['api_endpoint'],
 			'xml_version'	=> '1.0',
 			'encoding'		=> 'utf-8',
-			'xml_schema'	=> '',
-			'email_customer'=> $this->payments->config->module['email_customer'],
+			'xml_schema'	=> ''
 		);
 	}
 

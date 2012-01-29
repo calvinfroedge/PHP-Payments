@@ -27,7 +27,9 @@ $lang = array (
 	'response_detail_missing_profile_start_date'=>	'Profile start date is required but was not provided in the request',
 	'response_detail_missing_billing_period'	=>	'Billing period is required but was not provided in the request',
 	'response_detail_missing_billing_frequency'	=>	'Billing frequency is required but was not provided in the request',
-	'response_detail_missing_desc'				=>	'Description (desc) is required but was not provided in the request'
+	'response_detail_missing_desc'				=>	'Description (desc) is required but was not provided in the request',
+	'response_detail_missing_first_name' 		=>  'First name is required but was not provided in the request',
+	'response_detail_missing_last_name'			=>  'Last name is required but was not provided in the request'
 );
 
 return $lang;
