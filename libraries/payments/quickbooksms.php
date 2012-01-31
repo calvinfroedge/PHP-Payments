@@ -38,7 +38,7 @@ class QuickBooksMS
 	public function __construct($payments)
 	{
 		$this->payments = $payments;				
-		$this->_default_params = $this->payments->config->module['method_params'];
+		$this->_default_params = $this->payments->config->module['required_params'];
 		$this->_api_endpoint = $this->payments->config->module['api_endpoint'.'_'.$this->payments->mode];	
 		$this->_api_settings = array(
 			'login'			=> (isset($payments->gateway_credentials)) ? $payments->gateway_credentials['api_application_login'] : $this->payments->config->module['api_application_login'],
