@@ -33,7 +33,7 @@ class Psigate
 	public function __construct($payments)
 	{
 		$this->payments = $payments;				
-		$this->_default_params = $this->payments->config->module['method_params'];
+		$this->_default_params = $this->payments->config->module['required_params'];
 	}
 	
 	protected function _set_messenger_settings()
