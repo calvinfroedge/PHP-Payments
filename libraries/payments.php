@@ -254,7 +254,7 @@ class Payments
 	private function _do_method($payment_module)
 	{	
 		$this->default_params = $this->_load('config', 'payment_types/'.$this->payment_type);
-		
+
 		$object = new $payment_module($this);
 		
 		$method = $payment_module.'_'.$this->payment_type;

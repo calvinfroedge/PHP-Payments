@@ -1,5 +1,5 @@
 <?php
-$config['recurring_payment'] = array(
+$config = array(
 			'first_name'				=>	'', //Subscriber's name.
 			'last_name'					=>	'',
 			'profile_start_date'		=>	'', //Required.  The subscription start date.

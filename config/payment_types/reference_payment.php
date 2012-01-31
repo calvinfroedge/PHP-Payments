@@ -1,6 +1,6 @@
 <?php
 
-$config['reference_payment']	= array
+$config = array
 		(
 			'ip_address'		=>	'',	//IP address of purchaser
 			'cc_type'			=>	'',	//Visa, MasterCard, Discover, Amex

@@ -1,6 +1,6 @@
 <?php
 
-$config['refund_payment']	= array
+$config	= array
 		(
 			'identifier'			=>	'', //A unique identifier for the transaction
 			'inv_num'				=>	'',

@@ -1,6 +1,6 @@
 <?php
 
-$config['oneoff_payment_button'] = array(
+$config = array(
 	'amt'			=>	'',	//Amount for the payment
 	'desc'			=>	'', //A description for the transaction
 	'notify_url'	=>	'',	//Your URL for receiving Instant Payment Notification (IPN) about this transaction. If you do not specify this value in the request, the notification URL from your Merchant Profile is used, if one exists.

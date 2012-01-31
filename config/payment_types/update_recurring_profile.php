@@ -1,6 +1,6 @@
 <?php
 
-$config['update_recurring_profile']	= array(
+$config	= array(
 			'identifier'				=>	'',	//Required.
 			'note'						=>	'',	
 			'subscriber_name'			=>	'',

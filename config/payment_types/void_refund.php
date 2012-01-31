@@ -1,6 +1,6 @@
 <?php
 
-$config['void_refund'] = array
+$config = array
 (
 	'cc_number' => '',
 	'cc_type' 	=> '',

@@ -1,6 +1,6 @@
 <?php
 
-$config['get_oneoff_button'] = array(
+$config = array(
 	'amt' => '',
 	'desc' => ''
 );

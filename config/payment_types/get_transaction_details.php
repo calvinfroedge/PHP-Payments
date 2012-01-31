@@ -1,6 +1,6 @@
 <?php
 
-$config['get_transaction_details'] = array(
+$config = array(
 			'identifier'			=>	'' //Required. Unique identifier for the transaction, generated from a previous transaction.
 );
 

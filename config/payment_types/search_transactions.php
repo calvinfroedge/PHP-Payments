@@ -1,6 +1,6 @@
 <?php
 
-$config['search_transactions']	= array
+$config	= array
 		(
 			'start_date'			=>	'2011-07-02T00:24:59+00:00',	//REQUIRED.  Date to search from.
 			'end_date'				=>	'',	//Date to search to

@@ -1,6 +1,6 @@
 <?php
 
-$config['authorize_payment'] = array(
+$config = array(
 			'ip_address'		=>	'',	//IP address of purchaser
 			'cc_type'			=>	'',	//Visa, MasterCard, Discover, Amex
 			'cc_number'			=>	'', //Credit card number

@@ -1,6 +1,6 @@
 <?php
 
-$config['authorize_payment_button'] = array(
+$config = array(
 	'amt'		=>	'',	//Amount for the payment
 	'desc'		=>	'', //A description for the transaction
 );

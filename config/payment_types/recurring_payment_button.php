@@ -1,6 +1,6 @@
 <?php
 
-$config['recurring_payment_button'] = array(
+$config = array(
 	'amt'						=>	'',	//Amount for the payment
 	'desc'						=>	'', //A description for the transaction
 	'trial_billing_frequency'	=>	'', //Set this if you want a trial.  Year, month, week, day.
