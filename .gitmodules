@@ -1,0 +1,6 @@
+[submodule "vendor/stripe"]
+	path = vendor/stripe
+	url = https://github.com/stripe/stripe-php.git
+[submodule "vendor/braintree"]
+	path = vendor/braintree
+	url = https://github.com/braintree/braintree_php.git
