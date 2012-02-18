@@ -54,6 +54,14 @@ class Payment_Response
 	}
 
 	/**
+	 * Get the Language
+	*/
+	public static function get_language()
+	{
+		return self::$_language;
+	}
+
+	/**
 	 * Returns a local response
 	 *
 	 * @param 	string	can be either 'Success' or 'Failure'

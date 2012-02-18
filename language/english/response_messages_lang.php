@@ -10,8 +10,8 @@ $lang = array (
 	'invalid_date_params'							=>	'Units of time must be called "Year", "Month", or "Day"',
 	'not_a_method'									=>	'The method called does not exist',
 	'required_params_missing'						=>	'Some required parameters have been omitted.',
-	'invalid_xml'				=>  'A response was returned from the gateway, but we cannot parse it as XML.  The string has been included',
-
+	'invalid_xml'									=>  'A response was returned from the gateway, but we cannot parse it as XML.  The string has been included',
+	'authentication_failure'						=>  'Application failed to authenticate with the payment gateway.  Cannot proceed.',
 	//Payment Methods
 	'authorize_payment_success'						=>	'The authorization was successful.',
 	'authorize_payment_local_failure'				=>	'The authorization was not sent to the payment gateway because it failed validation.',	
@@ -19,9 +19,9 @@ $lang = array (
 	'oneoff_payment_success'						=>	'The payment was successful.',
 	'oneoff_payment_local_failure'					=>	'The payment could not be sent to the payment gateway because it failed local validation.',
 	'oneoff_payment_gateway_failure'				=>	'The payment was declined by the payment gateway.',
-	'oneoff_payment_button_success'				=>  'The payment button was generated successfully',
-	'oneoff_payment_button_local_failure'		=>  'There was a problem generating the payment button',
-	'oneoff_payment_button_gateway_failure'		=>  'The payment button could not be generated',
+	'oneoff_payment_button_success'					=>  'The payment button was generated successfully',
+	'oneoff_payment_button_local_failure'			=>  'There was a problem generating the payment button',
+	'oneoff_payment_button_gateway_failure'			=>  'The payment button could not be generated',
 	'reference_payment_success'						=>	'The payment was successful.',
 	'reference_payment_local_failure'					=>	'The payment could not be sent to the payment gateway because it failed local validation.',
 	'reference_payment_gateway_failure'				=>	'The payment was declined by the payment gateway.',	

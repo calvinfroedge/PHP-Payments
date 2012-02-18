@@ -110,7 +110,8 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 					'custom'		=>	'CUSTOM',
 					'inv_num'		=>	'INVNUM',
 					'notify_url'	=>	'NOTIFYURL',
-					'ship_to_name'	=>	'SHIPTONAME',
+					'ship_to_first_name'	=>	'SHIPTONAME',
+					'ship_to_last_name'	=> 'SHIPTONAME',
 					'ship_to_street'=>	'SHIPTOSTREET',
 					'ship_to_city'	=>	'SHIPTOCITY',
 					'ship_to_state'	=>	'SHIPTOSTATE',
@@ -476,7 +477,7 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 				}
 				else
 				{
-					$fields[$key] += " $v";
+					$fields[$key] .= " $v";
 				}
 			}
 			else
@@ -485,11 +486,14 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 			}
 		}
 		
-		$static = $map[$l]['static'];
-
-		foreach($static as $k=>$v)
+		if(isset($map[$l]['static']))
 		{
-			$fields[$k] = $v;
+			$static = $map[$l]['static'];
+	
+			foreach($static as $k=>$v)
+			{
+				$fields[$k] = $v;
+			}
 		}
 
 		return $fields;

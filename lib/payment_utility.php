@@ -4,6 +4,9 @@ class Payment_Utility
 {
 	public function __construct(){}
 
+	/**
+	 * Autoloader.  Allows us to call classes without a require or include statement - lookups are referred here
+	*/
 	public function class_autoload($class)
 	{
 		$class = strtolower($class);
@@ -31,7 +34,7 @@ class Payment_Utility
 	}
 
 	/**
-	  * Load a resource.  Alternative to include / require / etc.
+	  * Load a resource.  Alternative to include / require / etc.  Passing a key will return a specific entry in a config / lang array.
 	*/
 	public static function load($type, $file, $key = null)
 	{
@@ -74,26 +77,6 @@ class Payment_Utility
 	}
 
 	/**
-	 * Remove key=>value pairs with empty values
-	 *
-	 * @param	array	array of key=>value pairs to check
-	 * @return	array	Will return filtered array
-	 */
-	public static function filter_values($array)
-	{	
-		foreach($array as $k=>$v)
-		{
-			$v = trim($v);
-			if(empty($v) AND !is_numeric($v))
-			{
-				unset($array[$k]);
-			}
-		}
-		return $array;
-	}
-
-
-	/**
 	 * Arrayize an object
 	 *
 	 * @param	object	the object to convert to an array
@@ -126,6 +109,25 @@ class Payment_Utility
 	}
 
 	/**
+ 	 * Sort an array by an array.  Modified example from StackOverflow: http://stackoverflow.com/questions/348410/sort-an-array-based-on-another-array
+	 *
+	 * @param	array	An array to sort
+	 * @param	array	An array to sort by
+	 * @return	array	A sorted array
+     */
+	public static function sort_array_by_array($array, $order) {
+    	$ordered = array();
+    	foreach($order as $key) {
+       		if(array_key_exists($key,$array)) {
+       	   		$ordered[$key] = $array[$key];
+                unset($array[$key]);
+        	}
+    	}
+
+		return $ordered;
+	}
+
+	/**
 	 * Parses an XML response and creates an object using SimpleXML
 	 *
 	 * @param 	string	raw xml string
@@ -138,10 +140,17 @@ class Payment_Utility
 		if($xml_str[0] != '<')
 		{
 			$xml_str = explode('<', $xml_str);
-			unset($xml_str[0]);
-			$xml_str = '<'.implode('<', $xml_str);
+			if(count($xml_str) > 1)
+			{
+				unset($xml_str[0]);
+				$xml_str = '<'.implode('<', $xml_str);
+			}
+			else
+			{
+				$xml_str = $xml_str[0];
+			}
 		}
-		
+	
 		try {
 			$xml = @new SimpleXMLElement($xml_str);
 		}

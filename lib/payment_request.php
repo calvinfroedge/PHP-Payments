@@ -175,7 +175,7 @@ class Payment_Request
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
 
 			$request = curl_exec($curl);
-			
+
 			if(isset($xml) && $xml === TRUE)
 			{
 				return Payment_Utility::parse_xml($request);

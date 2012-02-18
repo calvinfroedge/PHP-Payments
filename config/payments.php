@@ -60,6 +60,7 @@ $config['response_codes'] = array (
 	'not_a_method'									=>	'000',
 	'required_params_missing'						=>	'000',
 	'invalid_xml' 									=>  '000',
+	'authentication_failure'						=>	'011',
 
 	//Payment Methods
 	'authorize_payment_success'						=>	'100',
