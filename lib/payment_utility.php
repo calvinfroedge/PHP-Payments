@@ -77,6 +77,23 @@ class Payment_Utility
 	}
 
 	/**
+	 * Loads all files in a particular directory
+	 *
+	 * @param	string	A dir to load from
+	*/
+	public static function load_all_files($dir)
+	{
+		foreach(scandir($dir) as $k=>$v){
+			//Ignore swap files, directory files, etc.
+			if($v[0] !== '.' && (substr($v, -3, 3) == 'php') )
+			{
+				$file = str_replace('.php', '', $v);
+				self::load('file', $dir.'/'.$file);
+			}
+		}
+	}
+
+	/**
 	 * Arrayize an object
 	 *
 	 * @param	object	the object to convert to an array
@@ -165,7 +182,22 @@ class Payment_Utility
 		return $xml;
 	}
 
-
+	/**
+	 * Sanitizes XML params so they will not cause parsing errors on remote end
+	 *
+	 * @param	array	Reference to XML params
+	*/
+	public static function sanitize_xml_params(&$params)
+	{
+		function array_walk_sanitize_callback(&$v, $k)
+		{
+			if(strpos($v, '&') !== false) $v = str_replace('&', '&#x26;', $v);
+			if(strpos($v, '<') !== false) $v = str_replace('<', '&#x3c;', $v);
+			if(strpos($v, '>') !== false) $v = str_replace('>', '&#x3e;', $v);
+		}
+		array_walk_recursive($params, 'array_walk_sanitize_callback');
+	}
+	
 	/**
 	 * Connection is Secure
 	 * 

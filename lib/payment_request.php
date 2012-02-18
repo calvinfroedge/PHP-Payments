@@ -29,6 +29,9 @@ class Payment_Request
 			$xml .= '<'.$parent.' '.$xml_schema.'>';
 		}
 		
+		//XML parsing at the server end will break if certain characters are not replaced
+		Payment_Utility::sanitize_xml_params($xml_params);
+
 		$xml .= self::build_nodes($xml_params);
 		
 		if(!is_null($parent))
@@ -38,7 +41,7 @@ class Payment_Request
 		
 		return $xml;
 	}
-	
+
 	/**
 	 * Returns a well-formed string of XML nodes
 	 *

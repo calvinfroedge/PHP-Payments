@@ -52,7 +52,15 @@ class Payment_Validator
 			if(!array_key_exists($v, $params) OR empty($params[$v]) OR is_null($params[$v]) OR $params[$v] == ' ')
 			{
 				$key = 'missing_'.$v;
-				$missing[] = $lang[$key];
+				if(isset($lang[$key]))
+				{
+					$missing[] = $lang[$key];
+				}
+				else
+				{
+					error_log("$key does not exist in response message language file.");
+					$missing[] = "$v is required but was not provided";
+				}
 			}
 		}
 

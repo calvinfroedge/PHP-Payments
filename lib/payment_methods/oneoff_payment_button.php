@@ -25,6 +25,22 @@ class Oneoff_Payment_Button implements Payment_Method
 			'fax'				=>	'',
 			'identifier' => '', //Merchant provided identifier for the transaction
 			'currency_code'		=>	'', //currency code to use for the transaction.	
+			'continue_url'	=>	'', //Link for continue shopping button
+			'edit_url' => '', //Url for editing one's cart
+			'items' => array(
+				array(
+					'desc' => '',
+					'amt' => '',
+					'name' => '',
+					'qty' => ''
+				)
+			), //An array of items
+			'shipping_options' => array(
+				array(
+					'desc' => '',
+					'amt' => ''
+				)
+			)
 		);
 	}
 
