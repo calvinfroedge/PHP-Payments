@@ -5,6 +5,7 @@
  * These messages return something that could be meaningful in a log message or to a user.
 */
 $lang = array (
+
 	'not_a_module'									=>	'The payment module provided is not valid.',
 	'invalid_input' 								=>	'The input provided is not in the correct format',
 	'invalid_date_params'							=>	'Units of time must be called "Year", "Month", or "Day"',
