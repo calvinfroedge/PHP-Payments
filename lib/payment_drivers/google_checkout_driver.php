@@ -115,7 +115,7 @@ class Google_Checkout_Driver extends Payment_Driver
 				foreach($v as $ship)
 				{	
 					$ship_arr = new GoogleFlatRateShipping(
-						$ship['name'],
+						$ship['desc'],
 						$ship['amt']
 					);
 
