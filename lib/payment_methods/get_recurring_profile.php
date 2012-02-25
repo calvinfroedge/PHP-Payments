@@ -13,6 +13,6 @@ class Get_Recurring_Profile implements Payment_Method
 
 	public function get_params()
 	{
-		return $this->_params();
+		return $this->_params;
 	}
 }
