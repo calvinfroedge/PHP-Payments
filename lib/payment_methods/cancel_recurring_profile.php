@@ -7,8 +7,8 @@ class Cancel_Recurring_Profile implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'identifier'	=>	'', //Required.  Should have been returned when you created the profile.
-			'note'			=>	'', //This is just a note.
+			'identifier'	=>	'PROFILE-23928239', //Required.  Should have been returned when you created the profile.
+			'note'			=>	'The reason for cancelling this profile', //This is just a note.
 		);
 	}
 

@@ -7,15 +7,16 @@ class Recurring_Payment_Button implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'amt'						=>	'',	//Amount for the payment
-			'desc'						=>	'', //A description for the transaction
-			'trial_billing_frequency'	=>	'', //Set this if you want a trial.  Year, month, week, day.
-			'trial_billing_cycles'		=>	'', //Total # of times you want the customer to be billed at the trial rate.
-			'trial_amt'					=>	'',	//The trial rate.
-			'profile_start_date' 		=> '',
-			'billing_period' 			=> '',
-			'billing_frequency' 		=> '',
-			'total_billing_cycles' 		=> ''
+			'amt'						=>	'14.00',	//Amount for the payment
+			'desc'						=>	'A description for the transaction', //A description for the transaction
+			'trial_billing_period'		=>  'Month',
+			'trial_billing_frequency'	=>	'1', //Set this if you want a trial.  Year, month, week, day.
+			'trial_billing_cycles'		=>	'1', //Total # of times you want the customer to be billed at the trial rate.
+			'trial_amt'					=>	'10.00',	//The trial rate.
+			'profile_start_date' 		=>  '2012-07-18',
+			'billing_period' 			=>  'Month',
+			'billing_frequency' 		=>  '1',
+			'total_billing_cycles' 		=>  '12'
 		);
 	}
 

@@ -7,8 +7,8 @@ class Change_Transaction_Status implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'identifier'			=>	'',  //Required. Unique identifier for the transaction, generated from a previous transaction.
-			'action'				=>	''  //Required.  Should be Accept or Deny.
+			'identifier'			=>	'TRANS-239239',  //Required. Unique identifier for the transaction, generated from a previous transaction.
+			'action'				=>	'Accept'  //Required.  Should be Accept or Deny.
 		);
 	}
 

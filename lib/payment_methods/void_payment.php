@@ -7,8 +7,8 @@ class Void_Payment implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'identifier'			=>	'',	//Required. Unique identifier for the transaction, generated from a previous authorization.
-			'note'					=>	'' //An optional note to be submitted along with the request.
+			'identifier'			=>	'ID2930238',	//Required. Unique identifier for the transaction, generated from a previous authorization.
+			'note'					=>	'Some note to tell why you voided it.' //An optional note to be submitted along with the request.
 		);
 	}
 

@@ -190,10 +190,9 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 					'cc_type'		=>	'CREDITCARDTYPE',
 					'cc_number'		=>	'ACCT',
 					'cc_exp'		=>	'EXPDATE',
-					'final'			=>	'COMPLETETYPE',
 					'inv_num'		=>	'INVOICEID',
 					'note'			=>	'NOTE',
-					'cc_statement_descrip'	=>	'SOFTDESCRIPTOR'
+					'desc'			=>	'SOFTDESCRIPTOR' //Description for credit card statement
 				)
 			),
 			'void_payment'	=>	array(
@@ -255,7 +254,6 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 					'transaction_id'=>	'TRANSACTIONID',
 					'inv_num'		=>	'INVNUM',
 					'cc_number'		=>	'ACCT',
-					'auction_item_number'	=>	'AUCTIONITEMNUMBER',
 					'transaction_class'	=>	'TRANSACTIONCLASS',
 					'amt'			=>	'AMT',
 					'currency_code'	=>	'CURRENCYCODE',
@@ -301,8 +299,6 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 					'cc_type'				=>	'CREDITCARDTYPE',
 					'cc_number'				=>	'ACCT',
 					'cc_exp'				=>	'EXPDATE',
-					'start_date'			=>	'STARTDATE',
-					'issue_number'			=>	'ISSUENUMBER',
 					'email'					=>	'EMAIL',
 					'identifier'			=>	'PAYERID',
 					'country_code'			=>	'COUNTRY',

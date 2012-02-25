@@ -7,21 +7,21 @@ class Void_Refund implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'cc_number' => '',
-			'cc_type' 	=> '',
-			'cc_code' 	=> '',
-			'cc_exp'	=> '',
-			'amt'		=> '',
-			'first_name' => '',
-			'last_name' => '',
-			'phone' => '',
-			'email' => '',
-			'street' => '',
-			'city' => '',
-			'state' => '',
-			'country' => '',
-			'postal_code' => '',
-			'identifier' => ''	
+			'cc_number' => '4111111111111111',
+			'cc_type' 	=> 'Visa',
+			'cc_code' 	=> '203',
+			'cc_exp'	=> '022012',
+			'amt'		=> '14.00',
+			'first_name' => 'Calvin',
+			'last_name' => 'Froedge',
+			'phone' => '(801) 754 4466',
+			'email' => 'calvintest@gmail.com',
+			'street' => '311 Something Street',
+			'city' => 'Cookeville',
+			'state' => 'TN',
+			'country' => 'US',
+			'postal_code' => '38501',
+			'identifier' => 'IDTEST2039'	
 		);
 	}
 

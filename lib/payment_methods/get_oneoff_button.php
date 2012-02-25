@@ -7,8 +7,8 @@ class Get_Oneoff_Button implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'amt' => '',
-			'desc' => ''
+			'amt' => '25.00',
+			'desc' => 'This is the button text'
 		);
 	}
 

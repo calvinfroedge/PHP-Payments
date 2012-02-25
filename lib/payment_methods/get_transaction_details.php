@@ -7,7 +7,7 @@ class Get_Transaction_Details implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'identifier'	=>	'', //Required.  Should have been returned when you created the transaction.
+			'identifier'	=>	'TRANS-239238', //Required.  Should have been returned when you created the transaction.
 		);
 	}
 

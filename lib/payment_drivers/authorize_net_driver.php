@@ -319,24 +319,10 @@ class Authorize_Net_Driver extends Payment_Driver
 			);
 		}		
 		
-		if(isset($params['duty_amt']))
-		{
-			$fields['duty'] = array(
-				'amount' => $params['duty_amt']
-			);	
-		}
-
 		if(isset($params['shipping']))
 		{
 			$fields['shipping'] = array(
 				'amount' => $params['shipping_amt']
-			);			
-		}
-		
-		if(isset($params['tax_exempt']))
-		{
-			$fields['taxExempt'] = array(
-				'taxExempt' => $params['tax_exempt']
 			);			
 		}
 

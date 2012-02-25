@@ -7,7 +7,7 @@ class Get_Recurring_Profile implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'identifier'	=>	'', //Required.  Should have been returned when you created the profile.
+			'identifier'	=>	'PROFILE-2923849', //Required.  Should have been returned when you created the profile.
 		);
 	}
 

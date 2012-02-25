@@ -7,38 +7,25 @@ class Oneoff_Payment_Button implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'amt'			=>	'',	//Amount for the payment
-			'desc'			=>	'', //A description for the transaction
-			'notify_url'	=>	'',	//Your URL for receiving Instant Payment Notification (IPN) about this transaction. If you do not specify this value in the request, the notification URL from your Merchant Profile is used, if one exists.
-			'shipping_amt'  =>	'', //The cost of shipping
-			'tax_amt'		=>	'', //Amount for just tax.	
-			'first_name'		=>	'', //first name of the purchaser
-			'last_name'			=>	'', //last name of the purchaser
-			'business_name'		=>	'', //name of business
-			'street'			=>	'', //street address of the purchaser
-			'street2'			=>	'', //street address 2 of purchaser
-			'city'				=>	'', //city of the purchaser
-			'state'				=>	'', //state of the purchaser
-			'country'		=>	'', // country of the purchaser
-			'postal_code'				=>	'', //zip code of the purchaser
-			'phone'	=>	'', //phone num of customer shipped to
-			'fax'				=>	'',
-			'identifier' => '', //Merchant provided identifier for the transaction
-			'currency_code'		=>	'', //currency code to use for the transaction.	
-			'continue_url'	=>	'', //Link for continue shopping button
-			'edit_url' => '', //Url for editing one's cart
+			'amt'			=>	'10.00',	//Amount for the payment
+			'desc'			=>	'Your button text',
+			'notify_url'	=>	'http://notify.me/url',	//Your URL for receiving Instant Payment Notification (IPN) about this transaction. If you do not specify this value in the request, the notification URL from your Merchant Profile is used, if one exists.
+			'shipping_amt'  =>	'2.00', //The cost of shipping
+			'tax_amt'		=>	'1.00', //Amount for just tax.	
+			'continue_url'	=>	'http://continue.after/purchase', //Link for continue shopping button
+			'edit_url' => 'http://edit.purchase', //Url for editing one's cart
 			'items' => array(
 				array(
-					'desc' => '',
-					'amt' => '',
-					'name' => '',
-					'qty' => ''
+					'desc' => 'Description for an item',
+					'amt' => '3.50',
+					'name' => 'The item name',
+					'qty' => '2'
 				)
 			), //An array of items
 			'shipping_options' => array(
 				array(
-					'desc' => '',
-					'amt' => ''
+					'desc' => 'The shipping option',
+					'amt' => '2.00'
 				)
 			)
 		);

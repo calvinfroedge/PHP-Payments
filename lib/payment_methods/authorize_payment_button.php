@@ -7,8 +7,8 @@ class Authorize_Payment_Button implements Payment_Method
 	public function __construct()
 	{
 		$this->_params = array(
-			'amt'		=>	'',	//Amount for the payment
-			'desc'		=>	'', //A description for the transaction
+			'amt'		=>	'2.00',	//Amount for the payment
+			'desc'		=>	'Click here to buy me', //A description for the button
 		);
 	}
 
