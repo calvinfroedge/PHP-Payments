@@ -4,6 +4,8 @@ class Get_Transaction_Details implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "Gets the logs for a particular transaction from the gateway.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -14,5 +16,10 @@ class Get_Transaction_Details implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

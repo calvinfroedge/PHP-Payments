@@ -4,6 +4,8 @@ class Recurring_Bill_Outstanding implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "Bill a particular recurring profile for an amount which previously could not be billed.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -16,5 +18,10 @@ class Recurring_Bill_Outstanding implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

@@ -125,10 +125,12 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 			'reference_payment'	=>	array(
 				'api' => 'DoReferenceTransaction',
 				'required' => array(
-					'identifier'  //Reference for a previous payment
+					'identifier',  //Reference for a previous payment
+					'amt'
 				),
 				'keymatch' => array(
-					'identifier' => 'REFERENCEID'
+					'identifier' => 'REFERENCEID',
+					'amt' => 'AMT'
 				),
 				'static' => array(
 					'PAYMENTACTION'	=>	'Sale'

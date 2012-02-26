@@ -4,6 +4,8 @@ class Authorize_Payment_Button implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "This method generates a button which is used to provide the user a link to a hosted payments page on which they can enter their payment information.  This method is similar to Authorize_Payment.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -15,5 +17,10 @@ class Authorize_Payment_Button implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

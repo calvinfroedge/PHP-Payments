@@ -4,6 +4,8 @@ class Get_Recurring_Profile implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "Gets a particular recurring profile and returns an object with all the details about it.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -14,5 +16,10 @@ class Get_Recurring_Profile implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

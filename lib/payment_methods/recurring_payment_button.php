@@ -4,6 +4,8 @@ class Recurring_Payment_Button implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "Generates an HTML button which redirects a user to a hosted payments page.  Similar to Recurring_Payment.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -23,5 +25,10 @@ class Recurring_Payment_Button implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

@@ -4,6 +4,8 @@ class Update_Recurring_Profile implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "Update the details associated with a recurring profile, including user information and billing information.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -52,5 +54,10 @@ class Update_Recurring_Profile implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip;
 	}
 }

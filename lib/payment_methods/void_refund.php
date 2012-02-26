@@ -4,6 +4,8 @@ class Void_Refund implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "Second guess a previous void operation.   Go ahead and settle.  Admittedly a weird API operation.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -28,5 +30,10 @@ class Void_Refund implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip;
 	}
 }

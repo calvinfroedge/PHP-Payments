@@ -4,6 +4,8 @@ class Search_Transactions implements Payment_Method
 {
 	private $_params;
 
+	private $_description = "Search transactions previously submitted to the gateway by a set of criteria.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -30,5 +32,10 @@ class Search_Transactions implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip;
 	}
 }

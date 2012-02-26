@@ -4,6 +4,8 @@ class Activate_Recurring_Profile implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "This method activates a recurring profile which was previously suspended.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -15,5 +17,10 @@ class Activate_Recurring_Profile implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

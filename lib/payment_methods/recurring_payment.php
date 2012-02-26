@@ -4,6 +4,8 @@ class Recurring_Payment implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "A transaction which repeats on a defined interval.  Some gateways allow a trial interval as well.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -61,5 +63,10 @@ class Recurring_Payment implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

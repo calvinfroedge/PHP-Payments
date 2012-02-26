@@ -4,6 +4,8 @@ class Oneoff_Payment_Button implements Payment_Method
 {
 	private $_params;
 
+	private $_descrip = "Creates HTML code for a button which directs the user to a hosted payments page on which they can complete the transaction.  Similar to Oneoff_Payment.";
+
 	public function __construct()
 	{
 		$this->_params = array(
@@ -34,5 +36,10 @@ class Oneoff_Payment_Button implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }

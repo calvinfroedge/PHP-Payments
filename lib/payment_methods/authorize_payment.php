@@ -1,9 +1,9 @@
 <?php
-
-
 class Authorize_Payment implements Payment_Method
 {
 	private $_params;
+
+	private $_descrip = "This method ensures that funds are available for a particular transaction and returns an identifier that can later be used to complete the transaction.  This method does not charge a user immediately.";
 
 	public function __construct()
 	{
@@ -53,5 +53,10 @@ class Authorize_Payment implements Payment_Method
 	public function get_params()
 	{
 		return $this->_params;
+	}
+
+	public function get_description()
+	{
+		return $this->_descrip();
 	}
 }
