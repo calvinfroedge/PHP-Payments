@@ -50,7 +50,7 @@ class Amazon_SimplePay_Driver extends Payment_Driver
 			);
 		}
 
-		if($this->_is_button) return $request;
+	 	return $this->_parse_response($request);
 	}
 
 	/**
@@ -134,8 +134,15 @@ class Amazon_SimplePay_Driver extends Payment_Driver
 	 * @param 	array	Raw response
 	 * @return	object	Payment_Response
 	*/
-	protected function _parse_response($raw_response)
+	protected function _parse_response($response)
 	{
-
+		if($this->_is_button)
+		{
+			return Payment_Response::instance()->local_response(
+				'success',
+				$this->_lib_method.'_success',
+				$response
+			);
+		}
 	}
 }

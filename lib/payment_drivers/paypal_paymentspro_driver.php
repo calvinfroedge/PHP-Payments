@@ -59,7 +59,6 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 		$this->_lib_method = $method;
 	
 		$args = $params[0];
-	
 		$request = $this->_build_request($args);
 		$endpoint = ($this->_mode == 'production') ? $this->_api_endpoint : $this->_api_endpoint_test;
 		$request_string = $endpoint.'?'.$request;
@@ -278,7 +277,9 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 					'cc_number',
 					'cc_exp',
 					'cc_code',
-					'billing_period'
+					'billing_period',
+					'billing_frequency',
+					'profile_start_date'
 				),
 				'keymatch' => array(
 					'first_name'			=>	'SUBSCRIBERNAME',
@@ -301,6 +302,7 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 					'cc_type'				=>	'CREDITCARDTYPE',
 					'cc_number'				=>	'ACCT',
 					'cc_exp'				=>	'EXPDATE',
+					'cc_code'				=>	'CVV2',
 					'email'					=>	'EMAIL',
 					'identifier'			=>	'PAYERID',
 					'country_code'			=>	'COUNTRY',
@@ -521,11 +523,12 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 			$gateway_response[$key]=$value;
 		}
 	
-		$details = (object) array();
-		
+		$details = (object) array(
+			'gateway_response' => (object) array()
+		);
 		foreach($gateway_response as $k=>$v)
 		{
-				$details->gateway_response->$k = $v;
+			$details->gateway_response->$k = $v;
 		}
 
 		if(isset($gateway_response['L_LONGMESSAGE0']))

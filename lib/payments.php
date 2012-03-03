@@ -10,7 +10,7 @@
 * @license http://www.opensource.org/licenses/mit-license.php
 */
 
-class Payments
+class PHP_Payments
 {
 	/**
 	 * Config Property
@@ -36,7 +36,7 @@ class Payments
 	{	
 		include_once('payment_utility.php');
 		spl_autoload_register(array(new Payment_Utility, 'class_autoload'));
-		$this->config = array_merge($this->config, Payment_Utility::load('config', 'payments'));
+		$this->config = array_merge($this->config, Payment_Utility::load('config', 'payments')); //Note that here, config file configuration rules are merged with what was passed in the constructor.  If there is a conflict, what was passed in the constructor is used.
 	}
 
 	/**
@@ -50,8 +50,8 @@ class Payments
 	{
 		$gateway = $params[0].'_Driver';
 		$args = $params[1];
-		$config = (isset($params[2])) ? $params[2] : @Payment_Utility::load('config', 'drivers/'.$gateway);
-		$config['mode'] = (isset($this->config['test_mode']) && $this->config['test_mode'] === true) ? 'test' : 'production';
+		$config = (isset($params[2])) ? $params[2] : @Payment_Utility::load('config', 'drivers/'.$params[0]); //Load the driver config if not passed in constructor
+		$config['mode'] = (isset($this->config['mode']) && $this->config['mode'] === 'test') ? 'test' : 'production';
 
 		try {
 			$driver = new $gateway($config);

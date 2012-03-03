@@ -10,59 +10,29 @@ It is highly recommended that you attempt to architect your application to achie
 
 There are config files for each gateway in the /config folder of the package.  You need to enter your own API usernames and passwords (the ones in there are mine, used only for testing purposes) in the config of each gateway you would like to use.
 
-## IMPORTANT!
+## Testing
 
 1.  If you want to test locally (and you should), you need to set "force_secure_connection" to FALSE in config/payments.php
 
-2.  By default, test api endpoints will be used.  To enable production endpoints, change the mode in /config/payments.php from 'test' to 'production'.  Note that if you are a Psigate customer, you must obtain your production endpoint from Psigate support.
+2.  By default, test api endpoints will be used.  To enable production endpoints, change the mode in /config/payments.php from 'test' to 'production' or pass a 'mode' parameter in the config param when you instantiate PHP payments (ie $p = new PHP-Payments(array('mode' => 'test'));.  Note that if you are a Psigate customer, you must obtain your production endpoint from Psigate support.
 
+3.  It's highly advised that you run tests before trying to go live.  The automated testing utility in the tests folder can help you do this.  To use tests:
 
-## Gateway Support
+- To run all tests, cd into tests and type test.php
+- To test all payment drivers, cd into tests and type test.php drivers
+- To test a specific payment driver, cd into tests and type test.php drivers driver (Where 'driver' is a driver name, such as stripe, beanstream or paypal_payments_pro)
 
-The following gateways are supported:
+Alternatively, you could visit test.php in a web browser to run all tests.  We may introduce enhanced browser based testing in the future - but for not the preferred usage is from command line.
 
-- PayPal Payments Pro
-- Authorize.net (AIM)
-- Psigate
-- Beanstream
-- QuickBooks Merchant Services
-- Eway (Australia)
-- Amazon SimplePay
+## Documentation
 
-## Methods Supported (note, not all methods are supported by all gateways.  For a full method support list visit http://payments.calvinfroedge.com/gateways ):
+To avoid constantly updating documentation to match code, we've opted for automating as much documentation as possible.  To view the current documentation, cd into the documentation folder, then cd into dox and type doxgen.php in the command line.  You can alternatively open this file in a web browser.
 
-- oneoff_payment: Makes a one time charge
-- reference_payment: Make a payment based on a previous transaction.  Mimics a card vault.  Currently only implemented in PayPal Payments Pro.
-- authorize_payment: Authorizes a charge, which is essentially a hold.  This requires later capturing the funds you authorized (most gateways require you do this the same business day).
-- capture_payment: Finalize an authorization, actually charges the customer.
-- void_payment: Cancel a payment that has not been settled (transactions get settled at the end of the business day).
-- refund_payment: Refund (or credit) a customer for a settled transaction.
-- get_transaction_details: Get details from a particular transaction.
-- change_transaction_status: Changes a transaction's status, ie to Accept or Decline.  Only available with PayPal.
-- search_transactions: Query transactions by parameters you define.  Only available with PayPal.
-- recurring_payment: Start a new recurring profile.
-- get_recurring_profile: Get info about a profile.
-- activate_recurring_profile: Activate a recurring profile that has been suspended.
-- cancel_recurring_profile: Cancel a recurring profile.
-- suspend_recurring_profile: Hold the recurring billing, but don't cancel.
-- recurring_bill_outstanding: Charge outstanding payments to a customer.
-- update_recurring_profile: Update amounts, names, addresses, etc.
+When you run doxgen, documentation will appear in documentation/HTML which you can load in your web browser.
 
-If you use a method that is not supported, the gateway will return a local failure.
+## Gateway, Method and Parameter Support
 
-## Parameters Available
-
-You can see the params available for each method in /config/payment_types/method_name
-
-An important parameter, that you will use often, is 'identifier.'  'Identifier' is used to uniquely identify recurring transactions and payments.  After each payment (ie authorization, capture, recurring billing), an identifier will be returned in the response which you can use to make later calls with that affect that payment.
-
-## Making Requests
-
-Examples for all gateways are available in /examples.  A request is formatted thusly:
-
-```php
-$payments->payment_action('gateway_name', $params);
-```
+As this is constantly changing, please run doxgen.php in the dox folder to generate up to date documentation.  At time of writing the README, PHP-Payments supports a dozen gateways.  However it should be mentioned the PHP-Payments currently supports two types of gateways - "Button" gateways and regular "Server to Server" gateways.  Button gateways may have server to server operations, but for things like payment methods (such as oneoff_payment_button) generate HTML code for a button.  This HTML code is retrieved from the detail property of a PHP-Payments response object.
 
 ## Responses
 
@@ -101,7 +71,7 @@ You can access this like $response->details->reason.  You may want to save the f
 
 ## LICENSE
 
-Copyright (c) 2011 Calvin Froedge
+Copyright (c) 2011-2012 Calvin Froedge
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

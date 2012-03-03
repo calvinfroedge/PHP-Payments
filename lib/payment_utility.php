@@ -83,7 +83,8 @@ class Payment_Utility
 	*/
 	public static function load_all_files($dir)
 	{
-		foreach(scandir($dir) as $k=>$v){
+		$base_dir = dirname(__DIR__);
+		foreach(scandir($base_dir.'/'.$dir) as $k=>$v){
 			//Ignore swap files, directory files, etc.
 			if($v[0] !== '.' && (substr($v, -3, 3) == 'php') )
 			{
@@ -189,11 +190,14 @@ class Payment_Utility
 	*/
 	public static function sanitize_xml_params(&$params)
 	{
-		function array_walk_sanitize_callback(&$v, $k)
+		if(!function_exists('array_walk_sanitize_callback'))
 		{
-			if(strpos($v, '&') !== false) $v = str_replace('&', '&#x26;', $v);
-			if(strpos($v, '<') !== false) $v = str_replace('<', '&#x3c;', $v);
-			if(strpos($v, '>') !== false) $v = str_replace('>', '&#x3e;', $v);
+			function array_walk_sanitize_callback(&$v, $k)
+			{
+				if(strpos($v, '&') !== false) $v = str_replace('&', '&#x26;', $v);
+				if(strpos($v, '<') !== false) $v = str_replace('<', '&#x3c;', $v);
+				if(strpos($v, '>') !== false) $v = str_replace('>', '&#x3e;', $v);
+			}
 		}
 		array_walk_recursive($params, 'array_walk_sanitize_callback');
 	}

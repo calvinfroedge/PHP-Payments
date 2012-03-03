@@ -11,7 +11,7 @@
 class Bluepay_Driver extends Payment_Driver {
 
 	/**
-	 * The API method currently being utilized
+	 * The API endpoint
 	 */
 	private $_api_endpoint = 'https://secure.bluepay.com/interfaces/bp20post';	
 	
@@ -42,9 +42,6 @@ class Bluepay_Driver extends Payment_Driver {
 	 */		
 	public function __construct($config)
 	{
-		$this->_api_endpoint = $config['api_endpoint'];	
-		$this->_api_version = $config['api_version'];	
-
 		$this->_api_settings = array(
 			'ACCOUNT_ID'	=> $config['api_account_id'],
 			'PAYMENT_TYPE'	=> 'CREDIT', //means credit card - not giving away money!
@@ -62,8 +59,9 @@ class Bluepay_Driver extends Payment_Driver {
 	{
 		$this->_lib_method = $method;
 		$args = $params[0];
+		$request_string = $this->_build_request($params);
 
-		$raw_response = Payment_Request::curl_request($this->_api_endpoint, $this->_build_request($params), 'application/x-www-form-urlencoded');
+		$raw_response = Payment_Request::curl_request($this->_api_endpoint, $request_string, 'application/x-www-form-urlencoded');
 		return $this->_parse_response($raw_response);
 	}
 	
@@ -194,7 +192,7 @@ class Bluepay_Driver extends Payment_Driver {
 		$params_ready['TAMPER_PROOF_SEAL'] = $this->_build_tamper_proof_seal(array_merge($params_ready, $this->_api_settings));
 
 		// Build HTTP Query Because we are using POST rather than XML
-		return http_build_query($params_ready);
+		return http_build_query(array_merge($this->_api_settings ,$params_ready));
 	}
 
 	// -------------------------------------------------------------------------

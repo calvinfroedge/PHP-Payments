@@ -125,7 +125,7 @@ class QuickBooksMS_Driver extends Payment_Driver
 					'cc_code' => 'CardSecurityCode'
 				),
 				'static' => array(
-					'isCardPresent' => FALSE
+					'isCardPresent' => '0'
 				)
 			),
 			'capture_payment' => array(
@@ -138,7 +138,7 @@ class QuickBooksMS_Driver extends Payment_Driver
 				)
 			),
 			'void_payment' => array(
-				'api' => 'CustomerCrediCardTxnVoidRq',
+				'api' => 'CustomerCreditCardTxnVoidRq',
 				'required' => array(
 					'identifier'
 				),
@@ -149,11 +149,12 @@ class QuickBooksMS_Driver extends Payment_Driver
 			'refund_payment' => array(
 				'api' => 'CustomerCreditCardTxnVoidOrRefundRq',
 				'required' => array(
-					'identifier'
+					'identifier',
+					'amt'
 				),
 				'keymatch' => array(
+					'identifier' => 'CreditCardTransID',
 					'amt' => 'Amount',
-					'identifier' => 'CreditCardTransID'
 				)
 			),
 			'recurring_payment' => array(
@@ -175,7 +176,7 @@ class QuickBooksMS_Driver extends Payment_Driver
 					'cc_code' => 'CardSecurityCode'
 				),
 				'static' => array(
-					'isRecurring' => TRUE
+					'isRecurring' => '1'
 				)
 			)
 		);
@@ -330,8 +331,8 @@ class QuickBooksMS_Driver extends Payment_Driver
 
 		$as_array = Payment_Utility::arrayize_object($xml);
 		
-		$signon = $as_array['SignonMsgsRs'];
-		$response = $as_array['QBMSXMLMsgsRs'];
+		$signon = (isset($as_array['SignonMsgsRs'])) ? $as_array['SignonMsgsRs'] : '';
+		$response = (isset($as_array['QBMSXMLMsgsRs'])) ? $as_array['QBMSXMLMsgsRs'] : '';
 		$result = '';
 		$message = '';
 		$identifier = '';
@@ -380,7 +381,7 @@ class QuickBooksMS_Driver extends Payment_Driver
 		{ //Transaction was successful
 			$details->identifier = $identifier;
 			
-			$details->timestamp = $signon['ServerDateTime'];
+			$details->timestamp = (isset($signon['ServerDateTime'])) ? $signon['ServerDateTime'] : '';
 			
 			return Payment_Response::instance()->gateway_response(
 				'Success',

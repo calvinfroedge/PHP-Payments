@@ -5,7 +5,7 @@
  * 
  * DEFAULT: test 
  */
-$config['payments_mode'] = 'test';
+$config['mode'] = 'test';
 
 /**
  * Force Secure Connection. Should only be turned to FALSE if testing.
@@ -18,35 +18,6 @@ $config['force_secure_connection'] = FALSE;
  * Sets the language to be used
 */
 $config['language'] = 'english';
-
-/**
-  * Supported Methods
-*/
-$config['supported_methods'] = array(
-	//BUTTON PAYMENTS (IE PAYPAL STANDARD, AMAZON SIMPLE PAY, GOOGLE CHECKOUT)
-	'oneoff_payment_button',
-	'authorize_payment_button',
-	'recurring_payment_button', 
-	
-	//SERVER TO SERVER INTEGRATION METHODS (IE ADVANCED API USERS)
-	'search_transactions',  //Search transactions based on criteria you define.
-	'get_transaction_details', //Returns a summary of a particular transaction
-	'authorize_payment',  //Authorize a payment.  Does not actually charge a customer.
-	'capture_payment', //Capture a payment
-	'oneoff_payment', //A one time payment
-	'reference_payment', //A one off payment that references a previous one off payment to use it's card data
-	'void_payment',  //Void a payment that has not yet been settled / finalized
-	'void_refund', //Reverse a refund
-	'change_transaction_status', //Change a particular transaction's status
-	'refund_payment', //Refund a payment
-	'recurring_payment',  //Create a recurring payment profile
-	'get_recurring_profile',  //Returns details about a recurring payment profile
-	'suspend_recurring_profile', //Suspends a recurring payment profile
-	'activate_recurring_profile',  //Activates a recurring payment profile which is suspended
-	'cancel_recurring_profile', //Cancels a recurring payment profile
-	'recurring_bill_outstanding',  //Bill an outstanding amount owed by a particular recurring payment customer
-	'update_recurring_profile'  //Update a particular recurring profile
-);
 
 /**
  * Response Codes

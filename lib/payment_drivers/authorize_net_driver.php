@@ -53,7 +53,7 @@ class Authorize_Net_Driver extends Payment_Driver
 		$this->_lib_method = $method;
 		$args = $params[0];
 
-		$this->_endpoint = ($this->_settings['test_mode'] == false) ? 'https://secure.authorize.net/gateway/transact.dll' : 'https://apitest.authorize.net/xml/v1/request.api';	
+		$this->_endpoint = ($this->_settings['mode'] !== 'test') ? 'https://secure.authorize.net/gateway/transact.dll' : 'https://apitest.authorize.net/xml/v1/request.api';	
 
 		$method_map = $this->method_map();
 		
@@ -61,6 +61,7 @@ class Authorize_Net_Driver extends Payment_Driver
 		$this->_api_method = (isset($method_map[$method]['method'])) ? $method_map[$method]['method'] : '';
 		
 		$request_string = $this->_build_request($args);
+
 		$response_raw = Payment_Request::curl_request($this->_endpoint, $request_string);
 		return $this->_parse_response($response_raw);
 	}
@@ -150,11 +151,13 @@ class Authorize_Net_Driver extends Payment_Driver
 			'update_recurring_profile' => array(
 				'api' => 'ARBUpdateSubscriptionRequest',
 				'required' => array(
-					'identifier'
+					'identifier',
+					'cc_number',
+					'cc_exp'
 				)
 			),
 			'cancel_recurring_profile' => array(
-				'api' => 'ARBCancelSubscription',
+				'api' => 'ARBCancelSubscriptionRequest',
 				'required' => array(
 					'identifier'
 				)
@@ -186,12 +189,12 @@ class Authorize_Net_Driver extends Payment_Driver
 			$nodes['transId'] = $params['identifier'];
 		}
 
-		if($this->_api == 'ARBGetSubscriptionStatusRequest' OR $this->_api_method == 'ARBUpdateSubscriptionRequest' OR $this->_api_method == 'ARBCancelSubscriptionRequest')
+		if($this->_api == 'ARBGetSubscriptionStatusRequest' OR $this->_api == 'ARBUpdateSubscriptionRequest' OR $this->_api == 'ARBCancelSubscriptionRequest')
 		{
 			$nodes['subscriptionId'] = $params['identifier'];
 		}	
 		
-		if($this->_api == 'ARBCreateSubscriptionRequest' OR $this->_api_method == 'ARBUpdateSubscriptionRequest')
+		if($this->_api == 'ARBCreateSubscriptionRequest' OR $this->_api == 'ARBUpdateSubscriptionRequest')
 		{
 			$nodes['subscription'] = $this->_transaction_fields($params);
 		}			
@@ -305,7 +308,7 @@ class Authorize_Net_Driver extends Payment_Driver
 			$fields['payment']['creditCard'] = $this->_add_payment('credit_card', $params);
 		}
 		
-		if(isset($params['identifier']) AND $this->_api_method != 'ARBUpdateSubscriptionRequest')
+		if(isset($params['identifier']) AND $this->_api != 'ARBUpdateSubscriptionRequest')
 		{
 			$fields['refTransId'] = $params['identifier'];
 		}
@@ -551,7 +554,7 @@ class Authorize_Net_Driver extends Payment_Driver
 	 * Parse the response from the server
 	 *
 	 * @param	array
-	 * @return	object
+	 * @return	object 
 	 */		
 	protected function _parse_response($xml)
 	{

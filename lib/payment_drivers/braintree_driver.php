@@ -146,9 +146,9 @@ class Braintree_Driver extends Payment_Driver
 				'keymatch' => array(
 					'amt' => 'amount',
 					'identifier' => 'orderId',
-					'cc_number' => 'card["number"]',
-					'cc_exp' => 'card["expirationDate"]',
-					'cc_code' => 'card["cvv"]',
+					'cc_number' => 'creditCard["number"]',
+					'cc_exp' => 'creditCard["expirationDate"]',
+					'cc_code' => 'creditCard["cvv"]',
 					'first_name' => 'billing["firstName"]',
 					'last_name' => 'billing["lastName"]',
 					'street' => 'billing["streetAddress"]',

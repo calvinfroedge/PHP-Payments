@@ -38,14 +38,7 @@ class Google_Checkout_Driver extends Payment_Driver
 
 		$request = $this->_build_request($args);
 
-		if($this->_is_button)
-		{
-			return $request;
-		}
-		else
-		{
-			//We'll need to parse a response if not a button, ie an actual API call
-		}
+		return $this->_parse_response($request);
 	}
 
 	/**
@@ -60,7 +53,7 @@ class Google_Checkout_Driver extends Payment_Driver
 					'currency_code',
 					'items',
 					'shipping_options',
-					/*'items' => array(
+					/*'items' => array( I'll THINK about adding item support = )
 						'name',
 						'desc',
 						'qty',
@@ -73,7 +66,7 @@ class Google_Checkout_Driver extends Payment_Driver
 						)
 					),*/
 					'edit_url',
-					'continue_url',
+					'continue_url'
 				),
 				'static' => array(
 					'SetRequestBuyerPhone' => $this->_config['request_buyer_phone'],
@@ -147,8 +140,15 @@ class Google_Checkout_Driver extends Payment_Driver
 	/**
 	 * Parses Response from the Gateway
 	*/
-	protected function _parse_response($raw_response)
+	protected function _parse_response($response)
 	{
-
+		if($this->_is_button)
+		{
+			return Payment_Response::instance()->local_response(
+				'success',
+				$this->_lib_method.'_success',
+				$response
+			);
+		}
 	}
 }

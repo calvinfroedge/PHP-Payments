@@ -55,6 +55,7 @@ class Eway_Driver Extends Payment_Driver
 				'oneoff_payment' => array(
 					'api' => 'authCaptureTransaction',
 					'required' => array(
+						'amt',
 						'first_name',
 						'last_name',
 						'email',
@@ -173,7 +174,7 @@ class Eway_Driver Extends Payment_Driver
 		{
 			$details->identifier = $as_array['ewayTrxnNumber'];
 			
-			return Payment_Response::gateway_response(
+			return Payment_Response::instance()->gateway_response(
 				'Success',
 				$this->_lib_method.'_success',
 				$details
@@ -184,7 +185,7 @@ class Eway_Driver Extends Payment_Driver
 			$details->reason = $as_array['ewayTrxnError'];
 			$details->gateway_response = $as_array;
 			
-			return Payment_Response::gateway_response(
+			return Payment_Response::instance()->gateway_response(
 				'Failure',
 				$this->_lib_method.'_gateway_failure',
 				$details

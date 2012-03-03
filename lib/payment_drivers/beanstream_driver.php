@@ -23,16 +23,6 @@ class Beanstream_Driver
 	private $_settings = array();
 	
 	/**
-	 * Validation
-	*/
-	private $_validation;
-	
-	/**
-	 * An array for storing all request data
-	*/	
-	private $_request = array();	
-
-	/**
 	 * The final string to be sent in the http query
 	*/	
 	private $_http_query;	
@@ -42,11 +32,6 @@ class Beanstream_Driver
 	*/		
 	public function __construct($config)
 	{
-		$this->_validation = array(
-			'username' => $config['validation_username'],
-			'password' => $config['validation_password']
-		);	
-
 		$this->_api_settings = array(
 			'merchant_id'	=> $config['merchant_id'],
 			'username'		=> $config['username'],
@@ -80,9 +65,9 @@ class Beanstream_Driver
 		$method_map = $this->method_map();
 
 		$this->_api_method = array($method_map[$method]['descriptor'] => $method_map[$method]['api']);
-		(isset($method_map[$method]['method'])) ? $this->_build_request($args, $method_map[$method]['method']) : $this->_build_request($args);
+		$request = (isset($method_map[$method]['method'])) ? $this->_build_request($args, $method_map[$method]['method']) : $this->_build_request($args);
 
-		return $this->_handle_query($method);
+		return $this->_handle_query($method, $request);
 	}
 
 	/**
@@ -159,7 +144,7 @@ class Beanstream_Driver
 			$request['rbBillingState'] = 'A';
 		}
 		
-		$this->_request = $request;
+		return $request;
 	}
 
 	/**
@@ -299,12 +284,6 @@ class Beanstream_Driver
 			$request['customerIP'] = $params['ip_address'];
 		}	
 
-		if(isset($this->_validation['username'], $this->_validation['password']))
-		{
-			$request['username'] = $this->_validation['username'];
-			$request['password'] = $this->_validation['password'];
-		}				
-		
 		return $request;
 	}	
 
@@ -462,16 +441,15 @@ class Beanstream_Driver
 	 *
 	 * @param	array
 	 * @param	array
-	 * @param	string
 	 * @return	array
 	 */		
-	private function _handle_query($method)
+	private function _handle_query($method, $request)
 	{
 		$settings = array_merge($this->_api_settings, $this->_api_method);
-		$merged = array_merge($settings, $this->_request);
+		$merged = array_merge($settings, $request);
 
-		$this->_request = http_build_query($request);
-		$this->_http_query = $this->_api_endpoint.$this->_request;
+		$request = http_build_query($request);
+		$this->_http_query = $this->_api_endpoint.$request;
 		
 		$request = Payment_Request::curl_request($this->_http_query);	
 		
@@ -524,11 +502,11 @@ class Beanstream_Driver
 			}
 			
 			$details->gateway_response = $gateway_response;	
-			$details->timestamp = $gateway_response['trnDate'];		
+			$details->timestamp = (isset($gateway_response['trnDate'])) ? $gateway_response['trnDate'] : gmdate('c');		
 				
-			if($gateway_response['trnApproved'] == '1')
+			if(isset($gateway_response['trnApproved']) && $gateway_response['trnApproved'] == '1')
 			{	
-				$details->identifier = $gateway_response['trnId'];
+				$details->identifier = (isset($gateway_response['trnId'])) ? $gateway_response['trnId'] : null;
 				
 				if(isset($gateway_response['rbAccountId']))
 				{
@@ -543,7 +521,7 @@ class Beanstream_Driver
 			}
 			else
 			{
-				$details->reason = $gateway_response['messageText'];
+				$details->reason = (isset($gateway_response['messageText'])) ? $gateway_response['messageText'] : null;
 				
 				return Payment_Response::instance()->gateway_response(
 					'failure',

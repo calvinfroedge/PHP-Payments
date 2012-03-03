@@ -1,8 +1,8 @@
 <?php
 
-$config['merchant_id'] = "";
-$config['username'] = "";
-$config['password'] = "";
+$config['merchant_id'] = "237380000";
+$config['username'] = "testuser";
+$config['password'] = "testpass11";
 $config['passCode'] = "72b7bdbCaac44AAa9b94ec9ca790E6AB";
 $config['validation_username'] = "";
 $config['validation_password'] = "";

@@ -143,7 +143,7 @@ class Psigate_Driver extends Payment_Driver
 					'ip_address' => 'CustomerIP'
 				),
 				'static' => array(
-					'CardAction' => '2',
+					'CardAction' => '1',
 					'PaymentType' => 'CC'
 				)
 			),
@@ -185,7 +185,8 @@ class Psigate_Driver extends Payment_Driver
 				),
 				'keymatch' => array(
 					'identifier' => 'OrderId',
-					'identifier_2' => 'TransRefNumber'
+					'identifier_2' => 'TransRefNumber',
+					'amt' => 'Subtotal'
 				),
 				'static' => array(
 					'CardAction' => '3',
