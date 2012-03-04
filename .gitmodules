@@ -4,3 +4,6 @@
 [submodule "vendor/braintree"]
 	path = vendor/braintree
 	url = https://github.com/braintree/braintree_php.git
+[submodule "vendor/gocardless"]
+	path = vendor/gocardless
+	url = https://github.com/gocardless/gocardless-php.git

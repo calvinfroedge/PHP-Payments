@@ -2,6 +2,7 @@
 
 $vals = array(
 	'all' => array(
+		'desc' => 'This is a description',
 		'cc_number' => '4111111111111111',
 		'cc_code' => '203',
 		'cc_type' => 'Visa',
