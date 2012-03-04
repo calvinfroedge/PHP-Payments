@@ -11,12 +11,9 @@
 				<li class="<?php echo ($page == 'contributors.php') ? 'active' : '';?>">
 					<a href="/contributors.html">Contributors</a>
 				</li>
-				<li class="<?php echo ($page == 'support.php') ? 'active' : '';?>">
-					<a href="/support.html">Supported Gateways and API Methods</a>
-				</li>
-				<li class="<?php echo ($page == 'frameworks.php') ? 'active' : '';?>">
+				<!--<li class="<?php echo ($page == 'frameworks.php') ? 'active' : '';?>">
 					<a href="/frameworks.html">Frameworks</a>
-				</li>
+				</li>-->
 				<li class="<?php echo ($page == 'usage.php') ? 'active' : '';?>">
 					<a href="/usage.html">Usage</a>
 				</li>
