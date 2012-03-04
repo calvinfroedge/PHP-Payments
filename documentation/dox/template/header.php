@@ -23,9 +23,6 @@
 				<li class="<?php echo ($page == 'methods.php') ? 'active' : '';?>">
 					<a href="/methods.html">Methods</a>
 				</li>
-				<li class="<?php echo ($page == 'donate.php') ? 'active' : '';?>">
-					<a href="/donate.html">Donate</a>
-				</li>
 				<li class="<?php echo ($page == 'drivers.php') ? 'active' : '';?>">
 					<a href="/drivers.html">Driver Specific Documentation</a>
 				</li>

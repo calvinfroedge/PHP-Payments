@@ -8,19 +8,22 @@ class Gocardless_Driver extends Payment_Driver
 	private $_endpoint;
 
 	/*
+	 * The PHP Payments method
+	*/ 
+	private $_lib_method;
+
+	/*
+	 * Config array
+	*/
+	private $_config;
+
+	/*
 	 * Constructor
 	*/
 	public function __construct($config)
 	{
 		Payment_Utility::load('file', 'vendor/gocardless/lib/gocardless');	
-		GoCardless::$environment = ($config['mode'] == 'test') ? 'sandbox' : 'production';
-		$account_details = array(
-		  'app_id'        => $config['app_identifier'],
-		  'app_secret'    => $config['app_secret'],
-		  'merchant_id'   => $config['id'],
-		  'access_token'  => $config['access_token']
-		);
-		GoCardless::set_account_details($account_details);
+		$this->_config = $config;
 	}
 
 	/**
@@ -32,6 +35,15 @@ class Gocardless_Driver extends Payment_Driver
 	*/
 	public function __call($method, $params)
 	{
+		GoCardless::$environment = ($this->_config['mode'] == 'test') ? 'sandbox' : 'production';
+		$account_details = array(
+		  'app_id'        => $this->_config['app_identifier'],
+		  'app_secret'    => $this->_config['app_secret'],
+		  'merchant_id'   => $this->_config['id'],
+		  'access_token'  => $this->_config['access_token']
+		);
+		GoCardless::set_account_details($account_details);
+
 		$args = $params[0];
 		$this->_lib_method = $method;
 		list($api, $api_method, $params_ready) = $this->_build_request($args);
