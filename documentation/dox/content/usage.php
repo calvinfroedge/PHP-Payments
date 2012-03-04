@@ -8,7 +8,7 @@
 <pre>
 include('/path/to/lib/payments.php');
 
-$payments = new Payments;
+$payments = new PHP_Payments;
 
 $config = Payment_Utility::load('config', '/path/to/config/file'); //You can do this or you can make this an array.  Config file is recommended since configuration needs differ by gateway.
 
