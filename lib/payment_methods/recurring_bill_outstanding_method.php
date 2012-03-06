@@ -1,6 +1,6 @@
 <?php
 
-class Recurring_Bill_Outstanding implements Payment_Method
+class Recurring_Bill_Outstanding_Method implements Payment_Method
 {
 	private $_params;
 

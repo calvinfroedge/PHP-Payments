@@ -1,6 +1,6 @@
 <?php
 
-class Void_Payment implements Payment_Method
+class Void_Payment_Method implements Payment_Method
 {
 	private $_params;
 

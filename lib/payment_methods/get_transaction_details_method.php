@@ -1,6 +1,6 @@
 <?php
 
-class Get_Transaction_Details implements Payment_Method
+class Get_Transaction_Details_Method implements Payment_Method
 {
 	private $_params;
 

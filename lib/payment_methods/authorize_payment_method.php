@@ -1,5 +1,5 @@
 <?php
-class Authorize_Payment implements Payment_Method
+class Authorize_Payment_Method implements Payment_Method
 {
 	private $_params;
 

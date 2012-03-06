@@ -1,6 +1,6 @@
 <?php
 
-class Activate_Recurring_Profile implements Payment_Method
+class Activate_Recurring_Profile_Method implements Payment_Method
 {
 	private $_params;
 

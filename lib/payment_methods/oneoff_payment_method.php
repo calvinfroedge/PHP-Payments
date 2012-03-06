@@ -1,15 +1,14 @@
 <?php
 
-class Update_Recurring_Profile implements Payment_Method
+class Oneoff_Payment_Method implements Payment_Method
 {
 	private $_params;
 
-	private $_descrip = "Update the details associated with a recurring profile, including user information and billing information.";
+	private $_descrip = "Performs authorize and capture actions simultaneously.  User is charged immediately.";
 
 	public function __construct()
 	{
 		$this->_params = array(
-			'identifier' 		=>  'YOUR-IDENTIFIER', //Merchant provided identifier for the transaction
 			'ip_address'		=>	'142.392.29.21',	//IP address of purchaser
 			'cc_type'			=>	'Visa',	//Visa, MasterCard, Discover, Amex
 			'cc_number'			=>	'4111111111111111', //Credit card number
@@ -28,6 +27,7 @@ class Update_Recurring_Profile implements Payment_Method
 			'amt'				=>	'25.00', //purchase amount
 			'phone'				=>	'(801) 754 4466', //phone num of customer shipped to
 			'fax'				=>	'(801) 754 4466',
+			'identifier' 		=>  'YOUR-IDENTIFIER', //Merchant provided identifier for the transaction
 			'currency_code'		=>	'USD', //currency code to use for the transaction.
 			'item_amt'			=>	'25.00', //Amount for just the item being purchased.
 			'insurance_amt'		=>	'0.00', //Amount for just insurance.
@@ -58,6 +58,6 @@ class Update_Recurring_Profile implements Payment_Method
 
 	public function get_description()
 	{
-		return $this->_descrip;
+		return $this->_descrip();
 	}
 }

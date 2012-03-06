@@ -1,6 +1,6 @@
 <?php
 
-class Capture_Payment implements Payment_Method
+class Capture_Payment_Method implements Payment_Method
 {
 	private $_params;
 

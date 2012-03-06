@@ -1,6 +1,6 @@
 <?php
 
-class Refund_Payment implements Payment_Method
+class Refund_Payment_Method implements Payment_Method
 {
 	private $_params;
 

@@ -1,6 +1,6 @@
 <?php
 
-class Oneoff_Payment_Button implements Payment_Method
+class Oneoff_Payment_Button_Method implements Payment_Method
 {
 	private $_params;
 

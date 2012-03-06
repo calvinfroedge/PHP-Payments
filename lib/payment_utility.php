@@ -4,11 +4,25 @@ class Payment_Utility
 {
 	public function __construct(){}
 
+	/*
+	* Checks classes which are attempted to autoload, ensures they are not ignored (ie to prevent conflict with frameworks)
+	*/
+	public static $autoload_ignore = array();
+
 	/**
 	 * Autoloader.  Allows us to call classes without a require or include statement - lookups are referred here
 	*/
 	public function class_autoload($class)
 	{
+		//If a class name is not going to match, don't bother looking for it - we'll just end up with an exception
+		if(strpos($class, 'Payment') === false && strpos($class, 'Driver') === false && strpos($class, 'Method') === false) return;
+
+		//Ignore classes that should be ignored
+		foreach(static::$autoload_ignore as $ignore)
+		{
+			if(strpos($class, $ignore) !== false) return;
+		}
+
 		$class = strtolower($class);
 		$base_dir = __DIR__.'/';
 

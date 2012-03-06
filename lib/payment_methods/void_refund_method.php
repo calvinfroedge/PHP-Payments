@@ -1,6 +1,6 @@
 <?php
 
-class Void_Refund implements Payment_Method
+class Void_Refund_Method implements Payment_Method
 {
 	private $_params;
 

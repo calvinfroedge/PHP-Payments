@@ -18,6 +18,9 @@ class Payment_Validator
 	 */			
 	public static function validate($method, $params, $required_params)
 	{
+		//Append _method to method name
+		$method = $method."_method";
+
 		//We'll need this later
 		$lang = Payment_Utility::load('lang', 'english/response_details');
 

@@ -1,6 +1,6 @@
 <?php
 
-class Change_Transaction_Status implements Payment_Method
+class Change_Transaction_Status_Method implements Payment_Method
 {
 	private $_params;
 

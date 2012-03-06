@@ -1,6 +1,6 @@
 <?php
 
-class Reference_Payment implements Payment_Method
+class Reference_Payment_Method implements Payment_Method
 {
 	private $_params;
 

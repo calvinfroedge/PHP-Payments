@@ -1,6 +1,6 @@
 <?php
 
-class Recurring_Payment_Button implements Payment_Method
+class Recurring_Payment_Button_Method implements Payment_Method
 {
 	private $_params;
 
