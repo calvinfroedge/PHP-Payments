@@ -236,7 +236,7 @@ class Authorize_Net_Driver extends Payment_Driver
 					),
 					array(
 						'settingName' => 'testRequest',
-						'settingValue' => $this->_settings['test_mode']
+						'settingValue' => ($this->_settings['mode'] == 'test') ? true : false
 					)
 				)
 			)
