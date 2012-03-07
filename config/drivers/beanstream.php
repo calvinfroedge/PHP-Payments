@@ -4,12 +4,10 @@ $config['merchant_id'] = "237380000";
 $config['username'] = "testuser";
 $config['password'] = "testpass11";
 $config['passCode'] = "72b7bdbCaac44AAa9b94ec9ca790E6AB";
-$config['validation_username'] = "";
-$config['validation_password'] = "";
 
 //Recurring billing settings.  Important!
-$config['delay_charge'] = '1'; //set this to 0 if you want to charge customers as soon as they elect to begin recurring billing, or 1 if you want to wait until their profile start date to bill them.
-$config['bill_outstanding'] = '1'; /* By default, new recurring billing accounts are flagged
+$config['delay_charge'] = FALSE; //set this to 0 if you want to charge customers as soon as they elect to begin recurring billing, or 1 if you want to wait until their profile start date to bill them.
+$config['bill_outstanding'] = TRUE; /* By default, new recurring billing accounts are flagged
 to automatically process back payments if the account
 is disabled and then re-activated. This setting may be
 modified at any time through the Beanstream member
