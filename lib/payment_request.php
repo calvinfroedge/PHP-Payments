@@ -12,7 +12,8 @@ class Payment_Request
 	*/	
 	public static function build_xml_request($xml_version, $character_encoding, $xml_params, $parent = NULL, $xml_schema = NULL, $xml_extra = NULL)
 	{
-		$xml = '<?xml version="'.$xml_version.'" encoding="'.$character_encoding.'"?>';
+		$encoding = ($character_encoding !== null) ? ' encoding="'.$character_encoding.'"' : '';
+		$xml = '<?xml version="'.$xml_version.'"'.$encoding.'?>';
 
 		if(!is_null($xml_extra))
 		{

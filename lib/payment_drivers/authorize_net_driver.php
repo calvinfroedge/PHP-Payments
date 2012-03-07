@@ -36,7 +36,7 @@ class Authorize_Net_Driver extends Payment_Driver
 			'xml_version' => '1.0',
 			'encoding' => 'utf-8',
 			'xml_schema' => 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"',
-			'email_customer' => TRUE
+			'email_customer' => (isset($config['email_customer'])) ? $config['email_customer'] : TRUE
 		);
 
 		foreach($config as $k=>$v)
