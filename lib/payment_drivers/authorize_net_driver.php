@@ -331,9 +331,7 @@ class Authorize_Net_Driver extends Payment_Driver
 
 		if(isset($params['po_num']))
 		{
-			$fields['poNumber'] = array(
-				'poNumber' => $params['po_num']
-			);		
+			$fields['poNumber'] = $params['po_num'];		
 		}
 		
 		$fields['customer'] = $this->_build_customer_fields($params);
