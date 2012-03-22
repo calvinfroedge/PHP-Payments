@@ -39,7 +39,7 @@ class Recurring_Payment_Method implements Payment_Method
 			'ship_to_company'			=>	'Some Company',
 			'cc_type'					=>	'Visa',	//Required.  Credit card type.
 			'cc_number'					=>	'4111111111111111',	//Required.  Credit card number.
-			'exp_date'					=>	'022015',	//Required.  Credit card expiration date.
+			'cc_exp'					=>	'022015',	//Required.  Credit card expiration date.
 			'cc_code'					=>	'203',	//Required.  Credit Card CVV code.
 			'email'						=>	'calvinsemail@gmail.com',
 			'identifier'				=>	'YOUR-IDENTIFIER',
