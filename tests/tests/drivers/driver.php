@@ -2,6 +2,8 @@
 
 class Test_Driver
 {
+	public $payments;
+
 	/*
 	 * Class name of the driver being tested
 	*/
@@ -32,18 +34,25 @@ class Test_Driver
 		);
 
 		echo "\n \n Starting test for $driver \n \n";
-		new PHP_Payments($config);
+		$this->payments = new PHP_Payments($config);
 
 		$test_config = include('.drivers.test_vals.php');
 
 		$class_name = str_replace('.php', '', $driver);
-		$this->class_name = $class_name; // Set a public property for class_name as well
+		$uc = explode("_", $class_name);
+		foreach($uc as $k=>$piece)
+		{
+			$uc[$k] = ucfirst($piece);
+		}
+		$class_name_uc = implode("_", $uc);
+
+		$this->class_name = $class_name_uc;
 		$config_name = str_replace('_driver', '', $class_name);
 		$loaded_config = Payment_Utility::load('config', 'drivers/'.$config_name);
 
 		$this->config = array_merge($config, $test_config);
-		
-		$this->class = new $class_name(array_merge($config, $loaded_config));
+	
+		$this->class = new $class_name_uc(array_merge($config, $loaded_config));
 
 		$this->methods_available = $this->class->method_map();		
 	}

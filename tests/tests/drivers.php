@@ -22,7 +22,7 @@ class Test_Drivers
 			{
 				if(file_exists($dir."/lib/payment_drivers/$v"."_driver.php"))
 				{
-					array_push($this->drivers, $v."_driver");
+					array_push($this->drivers, $v."_Driver");
 				}
 				else
 				{
