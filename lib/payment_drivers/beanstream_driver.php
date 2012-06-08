@@ -448,7 +448,7 @@ class Beanstream_Driver
 		$settings = array_merge($this->_api_settings, $this->_api_method);
 		$merged = array_merge($settings, $request);
 
-		$request = http_build_query($request);
+		$request = http_build_query($merged);
 		$this->_http_query = $this->_api_endpoint.$request;
 		
 		$request = Payment_Request::curl_request($this->_http_query);	
