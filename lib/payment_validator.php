@@ -91,19 +91,6 @@ class Payment_Validator
 				);
 			}
 		}
-
-		//Ensure amount is in DOLLARS.CENTS format
-		if(array_key_exists('amt', $params))
-		{
-			if(strpos($params['amt'], '.') === false)
-			{
-				return Payment_Response::instance()->local_response(
-					'failure',
-					'invalid_input',
-					'invalid_amount_format'
-				);
-			}
-		}
 		
 		//Ensure billing period is submitted in normalized form
 		if(array_key_exists('billing_period', $params))
