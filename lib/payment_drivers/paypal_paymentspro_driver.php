@@ -381,7 +381,7 @@ class PayPal_PaymentsPro_Driver extends Payment_Driver
 			'update_recurring_profile'	=>	array(
 				'api'	=>	'UpdateRecurringPaymentsProfile',
 				'required'	=>	array(
-					'identifier' => 'PROFILEID'
+					'identifier'
 				),
 				'keymatch' => array(
 					'identifier'	=>	'PROFILEID',
