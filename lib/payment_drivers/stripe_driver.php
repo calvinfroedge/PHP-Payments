@@ -133,6 +133,28 @@ class Stripe_Driver extends Payment_Driver
 					'amt' => 'amount'
 				)
 			),
+			'token_create' => array(
+				'api' => 'Stripe_Token',
+				'method' => 'create',
+				'required' => array(
+					'cc_number',
+					'cc_exp'
+				),
+				'keymatch' => array(
+					'identifier' => 'customer',
+					'cc_number' => 'card["number"]',
+					'cc_exp' => 'card["exp_month,exp_year"]',
+					'cc_code' => 'card["cvc"]',
+					'first_name' => 'card["name"]',
+					'last_name' => 'card["name"]',
+					'street' => 'card["address_line1"]',
+					'street2' => 'card["address_line2"]',
+					'postal_code' => 'card["address_zip"]',
+					'state' => 'card["address_state"]',
+					'country' => 'card["address_country"]',
+					'desc' => 'description'
+				)
+			)
 		);
 		return $map;
 	}

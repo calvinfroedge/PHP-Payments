@@ -37,6 +37,9 @@ $vals = array(
 	),
 	'eway_driver' => array(
 		'cc_number' => 4444333322221111
+	),
+	'beanstream_driver' => array(
+		'cc_number' => 4030000010001234
 	)
 );
 

@@ -24,7 +24,7 @@ $lang = array (
 	'oneoff_payment_button_local_failure'			=>  'There was a problem generating the payment button',
 	'oneoff_payment_button_gateway_failure'			=>  'The payment button could not be generated',
 	'reference_payment_success'						=>	'The payment was successful.',
-	'reference_payment_local_failure'					=>	'The payment could not be sent to the payment gateway because it failed local validation.',
+	'reference_payment_local_failure'				=>	'The payment could not be sent to the payment gateway because it failed local validation.',
 	'reference_payment_gateway_failure'				=>	'The payment was declined by the payment gateway.',	
 	'capture_payment_success'						=>	'The payment capture was successful.',
 	'capture_payment_local_failure'					=>	'The payment capture could not be sent to the payment gateway because it failed local validation.',
@@ -67,6 +67,9 @@ $lang = array (
 	'update_recurring_profile_success'				=>	'Recurring profile updated successfully.',
 	'update_recurring_profile_local_failure'		=>	'Recurring profile update request could not be sent to the payment gateway because local validation failed.',
 	'update_recurring_profile_gateway_failure'		=>	'Recurring profile update was rejected by the payment gateway.',		
+	'token_create_success' 							=>  'Card tokenization successful.',
+	'token_create_local_failure'					=>	'Card tokenization could not be attempted because validation failed locally.',
+	'token_create_gateway_failure'					=>  'Card tokenization failed at the payment gateway.'
 );
 
 return $lang;
