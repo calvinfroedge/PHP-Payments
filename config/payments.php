@@ -88,6 +88,9 @@ $config['response_codes'] = array (
 	'update_recurring_profile_success'				=>	'100',
 	'update_recurring_profile_local_failure'		=>	'000',
 	'update_recurring_profile_gateway_failure'		=>	'011',		
+ 	'token_create_success'                          =>  '100',
+  	'token_create_local_failure'                    =>  '000',
+   	'token_create_gateway_failure'                  =>  '011'
 );
 
 return $config;
