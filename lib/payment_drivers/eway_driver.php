@@ -61,6 +61,7 @@ class Eway_Driver Extends Payment_Driver
 						'email',
 						'cc_number',
 						'cc_exp',
+						'cc_code',
 						'street',
 						'postal_code',
 						'desc'
@@ -71,6 +72,7 @@ class Eway_Driver Extends Payment_Driver
 						'last_name' => 'ewayCardHoldersName&ewayCustomerLastName',
 						'cc_number' => 'ewayCardNumber',
 						'cc_exp' => 'ewayCardExpiryMonth,ewayCardExpiryYear',
+						'cc_code' => 'ewayCVN',
 						'email' => 'ewayCustomerEmail',
 						'street' => 'ewayCustomerAddress',
 						'postal_code' => 'ewayCustomerPostcode',
