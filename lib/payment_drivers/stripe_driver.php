@@ -154,6 +154,32 @@ class Stripe_Driver extends Payment_Driver
 					'country' => 'card["address_country"]',
 					'desc' => 'description'
 				)
+			),
+			'customer_create' => array(
+				'api' => 'Stripe_Customer',
+				'method' => 'create',
+				'required' => array(
+					'desc',
+					'identifier'
+				),
+				'keymatch' => array(
+					'identifier' => 'card',
+					'desc' => 'description'
+				)
+			),
+			'customer_charge' => array(
+				'api' => 'Stripe_Charge',
+				'method' => 'create',
+				'required' => array(
+					'amt',
+					'currency_code',
+					'identifier'
+				),
+				'keymatch' => array(
+					'identifier' => 'customer',
+					'amt' => 'amount',
+					'currency_code' => 'currency'
+				)
 			)
 		);
 		return $map;

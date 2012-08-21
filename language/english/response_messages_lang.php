@@ -69,7 +69,13 @@ $lang = array (
 	'update_recurring_profile_gateway_failure'		=>	'Recurring profile update was rejected by the payment gateway.',		
 	'token_create_success' 							=>  'Card tokenization successful.',
 	'token_create_local_failure'					=>	'Card tokenization could not be attempted because validation failed locally.',
-	'token_create_gateway_failure'					=>  'Card tokenization failed at the payment gateway.'
+	'token_create_gateway_failure'					=>  'Card tokenization failed at the payment gateway.',
+	'customer_create_success' 						=>  'Customer creation successful',
+	'customer_create_local_failure'					=>	'Customer creation could not be attempted because validation failed locally.',
+	'customer_create_gateway_failure'				=>  'Customer creation failed at the payment gateway.',
+	'customer_charge_success' 						=>  'Customer charge successful',
+	'customer_charge_local_failure'					=>	'Customer charge could not be attempted because validation failed locally.',
+	'customer_chage_gateway_failure'				=>  'Customer charge failed at the payment gateway.'
 );
 
 return $lang;
