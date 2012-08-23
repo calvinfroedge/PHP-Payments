@@ -54,7 +54,16 @@ class Stripe_Driver extends Payment_Driver
 	public function __call($method, $params)
 	{	
 		$args = $params[0];
-	
+		
+		//If you pass 10 to stripe you don't charge 10 dollars, you charge 10 cents
+		if(isset($args['amt']) && strpos($args['amt'], '.') === false){
+			$args['amt'] .= ".00";
+		}
+
+		if(isset($args['amt'][0]) && $args['amt'][0] == '.'){
+			unset($args['amt'][0]);
+		}
+
 		$method_map = $this->method_map();
 		
 		$this->_api = $method_map[$method]['api'];
