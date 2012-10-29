@@ -131,9 +131,9 @@ class Gocardless_Driver extends Payment_Driver
 		$method_map = $this->method_map();
 		$m = $method_map[$this->_lib_method];
 
-		if(count($m) == 1 && $m[0] == 'identifier')
+		if(count($params) == 1 && array_key_exists('identifier', $params))
 		{
-			$return_params = $params['identifier'];
+			$return_params = $params;
 		}
 		else
 		{
