@@ -43,7 +43,7 @@ class Recurring_Payment_Method implements Payment_Method
 			'cc_code'					=>	'203',	//Required.  Credit Card CVV code.
 			'email'						=>	'calvinsemail@gmail.com',
 			'identifier'				=>	'YOUR-IDENTIFIER',
-			'countrycode'				=>	'US',	//Required.  Buyer's country code.
+			'country'					=>	'US',	//Required.  Buyer's country code.
 			'business_name'				=>	'The Business Name',
 			'salutation'				=>	'Mr.',
 			'first_name'				=>	'Calvin',
@@ -55,8 +55,8 @@ class Recurring_Payment_Method implements Payment_Method
 			'city'						=>	'Simferople',	//Required.  Buyer's city.
 			'state'						=>	'CR',	//Required.  Buyer's state or province.
 			'postal_code'				=>	'UKR',	//Required.  Buyer's postal code.
-			'phone'						=>	'(801) 754 4466',	
-			'fax'						=>	'(801) 754 4466',	
+			'phone'						=>	'(801) 754 4466',
+			'fax'						=>	'(801) 754 4466',
 		);
 	}
 
