@@ -16,7 +16,7 @@ $config['force_secure_connection'] = FALSE;
 
 /**
  * Sets the language to be used
-/
+ */
 $config['language'] = 'english';
 
 /**
