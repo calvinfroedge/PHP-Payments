@@ -200,10 +200,15 @@ class Beanstream_Driver
 			$request['trnCardNumber'] = $params['cc_number'];
 		}
 		
-		if(isset($params['amt']))
-		{
-			$request['trnAmount'] = $params['amt'];
-		}
+        if (isset($params['amt']))
+        {
+            if ($method == 'M')
+            {
+                $request['Amount'] = $params['amt'];
+            } else {
+                $request['trnAmount'] = $params['amt'];
+            }
+        }
 		
 		if(isset($params['phone']))
 		{
@@ -468,8 +473,27 @@ class Beanstream_Driver
 	private function _parse_response($response)
 	{	
 		$details = (object) array();
-			
-		if(strstr($response, '<response>'))
+        if (is_object($response))
+        {
+            if ($response->code == '1')
+            {
+                return Payment_Response::instance()->gateway_response(
+                    'Success',
+                    $this->_lib_method . '_success',
+                    $details
+                );
+            }
+            else
+            {
+                $details->reason = $response->message;
+                return Payment_Response::instance()->gateway_response(
+                    'Failure',
+                    $this->_lib_method . '_gateway_failure',
+                    $details
+                );
+            }
+        }
+        elseif(strstr($response, '<response>'))
 		{
 			$response = Payment_Utility::parse_xml($response);
 			$response = Payment_Utility::arrayize_object($response);
