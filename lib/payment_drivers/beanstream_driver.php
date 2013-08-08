@@ -187,8 +187,7 @@ class Beanstream_Driver
 			{
 				$request['adjId'] = $params['identifier'];
 			}
-			
-			if($method === 'Q')
+
 			if($method === 'Q' OR $method === 'P')
 			{
 				$request['trnOrderNumber'] = $params['identifier'];
