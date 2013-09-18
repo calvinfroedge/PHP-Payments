@@ -9,4 +9,4 @@
 	url = https://github.com/gocardless/gocardless-php.git
 [submodule "documentation/html/assets/bootstrap"]
 	path = documentation/html/assets/bootstrap
-	url = https://github.com/twitter/bootstrap/
+	url = https://github.com/twbs/bootstrap/
