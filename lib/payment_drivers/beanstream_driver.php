@@ -181,6 +181,11 @@ class Beanstream_Driver
 			$request['trnExpYear'] = $year;
 		}
 
+		if(isset($params['cc_code']))
+		{
+			$request['trnCardCvd'] = $params['cc_code'];
+		}
+
 		if(isset($params['identifier']))
 		{
 			if($method === 'PAC' OR $method === 'VP' OR $method === 'VR' OR $method === 'R')
@@ -199,15 +204,15 @@ class Beanstream_Driver
 			$request['trnCardNumber'] = $params['cc_number'];
 		}
 		
-        if (isset($params['amt']))
+    if (isset($params['amt']))
+    {
+        if ($method == 'M')
         {
-            if ($method == 'M')
-            {
-                $request['Amount'] = $params['amt'];
-            } else {
-                $request['trnAmount'] = $params['amt'];
-            }
+            $request['Amount'] = $params['amt'];
+        } else {
+            $request['trnAmount'] = $params['amt'];
         }
+    }
 		
 		if(isset($params['phone']))
 		{
