@@ -218,6 +218,24 @@ class Braintree_Driver extends Payment_Driver
                     'trial_billing_frequency' => 'trialDurationUnit',
                     'inv_num' => 'id'
                 )
+            ),
+            'token_create' => array(
+                'api' => 'Braintree_Customer',
+                'method' => 'create',
+                'required' => array(
+                    'first_name'
+                ),
+                'keymatch' => array(
+                    'first_name' => 'firstName',
+                    'last_name' => 'lastName',
+                    'business_name' => 'company',
+                    'email' => 'email',
+                    'phone' => 'phone',
+                    'fax' => 'fax',
+                    'cc_number' => 'creditCard["number"]',
+                    'cc_exp' => 'creditCard["expirationDate"]',
+                    'cc_code' => 'creditCard["cvv"]'
+                )
             )
         );
         return $map;

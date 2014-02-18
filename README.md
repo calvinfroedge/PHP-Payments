@@ -3,51 +3,103 @@
 The original *PHP-Payments* source, documentation and license can be found [here](https://github.com/calvinfroedge/PHP-Payments)
 
 
+## Create Customer in vault
+[Braintree documentation](https://www.braintreepayments.com/docs/php/customers/create)
+
+
+```php
+$response = $payments->token_create('braintree', $params);
+```
+
+Minimal example:
+
+```php
+$params = array(
+    'first_name' =>	'firstName'     //Customer's first name
+);
+```
+
+Customer with Credit Card:
+
+```php
+$params = array(
+    'first_name' =>	'firstName',    //Customer's first name
+    'last_name' =>	'lastName',     //Customer's last name
+    'email'     =>	'email',        //Customer's email
+    'cc_number' =>  'creditCard["number"]', //Credit card number
+    'cc_exp'    =>  'creditCard["expirationDate"]', //Format MMYYYY
+    'cc_code'   =>  'creditCard["cvv"]'  //3 or 4 digit cvv code
+);
+```
+
+Access newly created customer's data:
+
+```php
+//customer Id
+$response->details->identifier;
+
+//payment method token
+$gatewayResponse = $response->details->gateway_response;
+$creditCard = $gatewayResponse->customer->__get('creditCards')[0];
+$token = $creditCard->__get('token');
+```
+
+
 ## Recurring Billing
 [Braintree documentation](https://www.braintreepayments.com/docs/php/subscriptions/create)
 
-Subscribing an existing customer in the vault to an existing plan:
+Subscribe an existing customer in the vault to an existing plan:
 
 ```php
 $response = $payments->recurring_payment('braintree', $params);
 ```
 
-### parameters accepted ###
 
 Minimal example:
 
 ```php
-'profile_reference' =>	'planId',  //Plan id the customer is being subscribed to
-'identifier'        =>	'paymentMethodToken' //Token for the credit card stored in the Vault
+$params = array(
+    'profile_reference' =>	'planId',  //Plan id the customer is being subscribed to
+    'identifier'        =>	'paymentMethodToken' //Token for the credit card stored in the Vault
+);
 ```
 
 Custom Subscription ID:
 
 ```php
-'profile_reference' =>	'planId',  //Plan id the customer is being subscribed to
-'identifier'        =>	'paymentMethodToken', //Token for the credit card stored in the Vault
-'inv_num'           =>	'id', //custom subscription id
+$params = array(
+    'profile_reference' =>	'planId',  //Plan id the customer is being subscribed to
+    'identifier'        =>	'paymentMethodToken', //Token for the credit card stored in the Vault
+    'inv_num'           =>	'id' //custom subscription id
+);
 ```
 
 Overriding Plan Price:
 
 ```php
-'profile_reference' =>	'planId',  //Plan id the customer is being subscribed to
-'identifier'        =>	'paymentMethodToken', //Token for the credit card stored in the Vault
-'amt'               =>  'price' //override the plan price
+$params = array(
+    'profile_reference' =>	'planId',  //Plan id the customer is being subscribed to
+    'identifier'        =>	'paymentMethodToken', //Token for the credit card stored in the Vault
+    'amt'               =>  'price' //override the plan price
+);
 ```
 
 Overriding Plan Trial duration:
 
 ```php
-'profile_reference'         =>	'planId',  //Plan id the customer is being subscribed to
-'identifier'                =>	'paymentMethodToken', //Token for the credit card stored in the Vault
-'trial_billing_cycles'      =>  'trialDuration', //if 0 the subscription will start immediately and the customer charged
-'trial_billing_frequency'   =>  'trialDurationUnit' //valid values are day and month
+$params = array(
+    'profile_reference'         =>	'planId',  //Plan id the customer is being subscribed to
+    'identifier'                =>	'paymentMethodToken', //Token for the credit card stored in the Vault
+    'trial_billing_cycles'      =>  'trialDuration', //if 0 the subscription will start immediately and the customer charged
+    'trial_billing_frequency'   =>  'trialDurationUnit' //valid values are day and month
+);
 ```
-Note: if the trial period is disabled for the given plan, the trial duration defined will be ignored.
+Note: if the trial period is disabled for the given plan, the trial parameters will be ignored.
 
 
+### Testing ###
+
+* no testing was implemented for these methods*
 
 ## LICENSE
 
