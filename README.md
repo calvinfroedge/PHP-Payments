@@ -8,7 +8,7 @@ The original *PHP-Payments* source, documentation and license can be found [here
 
 
 ```php
-$response = $payments->token_create('braintree', $params);
+$response = $payments->customer_create('braintree', $params);
 ```
 
 Minimal example:
@@ -42,6 +42,30 @@ $response->details->identifier;
 $gatewayResponse = $response->details->gateway_response;
 $creditCard = $gatewayResponse->customer->__get('creditCards')[0];
 $token = $creditCard->__get('token');
+```
+
+
+## Create Credit Card in vault
+[Braintree documentation](https://www.braintreepayments.com/docs/ruby/credit_cards/create)
+
+
+```php
+$response = $payments->token_create('braintree', $params);
+```
+
+```php
+$params = array(
+    'custom'    =>	'customerId',    //Customer id to whom the card is being associated
+    'cc_number' =>  'creditCard["number"]', //Credit card number
+    'cc_exp'    =>  'creditCard["expirationDate"]', //Format MMYYYY
+    'cc_code'   =>  'creditCard["cvv"]'  //3 or 4 digit cvv code (optional)
+);
+```
+
+Access created card's token:
+
+```php
+$response->details->identifier;
 ```
 
 

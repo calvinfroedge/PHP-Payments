@@ -219,7 +219,17 @@ class Braintree_Driver extends Payment_Driver
                     'inv_num' => 'id'
                 )
             ),
-            'token_create' => array(
+            'cancel_recurring_profile' => array(
+                'api' => 'Braintree_Subscription',
+                'method' => 'cancel',
+                'required' => array(
+                    'identifier'
+                ),
+                'keymatch' => array(
+                    'identifier' => 'id'
+                )
+            ),
+            'customer_create' => array(
                 'api' => 'Braintree_Customer',
                 'method' => 'create',
                 'required' => array(
@@ -232,9 +242,25 @@ class Braintree_Driver extends Payment_Driver
                     'email' => 'email',
                     'phone' => 'phone',
                     'fax' => 'fax',
+                    'identifier' => 'id',
                     'cc_number' => 'creditCard["number"]',
                     'cc_exp' => 'creditCard["expirationDate"]',
                     'cc_code' => 'creditCard["cvv"]'
+                )
+            ),
+            'token_create' => array(
+                'api' => 'Braintree_CreditCard',
+                'method' => 'create',
+                'required' => array(
+                    'custom',
+                    'cc_number',
+                    'cc_exp'
+                ),
+                'keymatch' => array(
+                    'custom' => 'customerId',
+                    'cc_number' => 'number',
+                    'cc_exp' => 'expirationDate',
+                    'cc_code' => 'cvv'
                 )
             )
         );
@@ -265,43 +291,40 @@ class Braintree_Driver extends Payment_Driver
         $l = $this->_lib_method;
         $params_ready = array();
 
-        $matcher = $map[$l]['keymatch'];
-        foreach($params as $k=>$v)
-        {
-            if(isset($matcher[$k]))
+        if(isset($map[$l]['keymatch'])) {
+
+            $matcher = $map[$l]['keymatch'];
+
+            foreach($params as $k=>$v)
             {
-                if(strpos($matcher[$k], '["') !== false)
+                if(isset($matcher[$k]))
                 {
-                    $ex = explode('["', $matcher[$k]);
-                    $arr = $ex[0];
-                    $arrk = str_replace('"]', '', $ex[1]);
+                        $val = ($k === 'cc_exp' ? $this->_format_date($v) : $v);
 
-                    if(!isset($params_ready[$arr])) $params_ready[$arr] = array();
-
-                    if($k === 'cc_exp')
+                    if(strpos($matcher[$k], '["') !== false)
                     {
-                        $d_mm = substr($v, 0, 2);
-                        $d_yyyy = substr($v, 2, 4);
+                        $ex = explode('["', $matcher[$k]);
+                        $arr = $ex[0];
+                        $arrk = str_replace('"]', '', $ex[1]);
 
-                        $params_ready[$arr][$arrk] = $d_mm.'/'.$d_yyyy; //set the date
-                    }
-                    else
-                    {
-                        $params_ready[$arr][$arrk] = $v;
+                        if(!isset($params_ready[$arr])) $params_ready[$arr] = array();
+
+                            $params_ready[$arr][$arrk] = $val;
+
+                        }
+                        else
+                        {
+                        $key = $matcher[$k];
+
+                        $params_ready[$key] = $val;
                     }
                 }
                 else
                 {
-                    $key = $matcher[$k];
-                    $val = $v;
-
-                    $params_ready[$key] = $val;
+                    error_log("$k is not a valid param for this method in this driver");
                 }
             }
-            else
-            {
-                error_log("$k is not a valid param for this method in this driver");
-            }
+
         }
 
         if(isset($map[$l]['static']))
@@ -315,6 +338,22 @@ class Braintree_Driver extends Payment_Driver
         }
 
         return $params_ready;
+    }
+
+    /**
+     * Convert the date to the Braintree accepted format
+     *
+     * @param $date
+     * @return string
+     */
+    private function _format_date($date) {
+
+        $d_mm = substr($date, 0, 2);
+        $d_yyyy = substr($date, 2, 4);
+
+        $formatedDate = $d_mm.'/'.$d_yyyy; //set the date
+
+        return $formatedDate;
     }
 
     /**
@@ -334,18 +373,31 @@ class Braintree_Driver extends Payment_Driver
         $details = (object) array();
         $details->gateway_response = $response;
 
-        if($requestDetails->__get('id')) $details->identifier = $requestDetails->__get('id');
+        $details->identifier = null;
+        if( isset($requestDetails->id) ) $details->identifier = $requestDetails->__get('id');
 
-        if($this->_api == 'Braintree_Transaction') {
-            if($requestDetails->__get('createdAt')) $details->timestamp = $requestDetails->__get('createdAt');
-            if($requestDetails->__get('processorResponseText')) $details->reason = $requestDetails->__get('processorResponseText');
+        switch ($this->_api) {
+            case 'Braintree_Transaction':
+                if( isset($requestDetails->processorResponseText) ) $details->reason = $requestDetails->__get('processorResponseText');
+            case 'Braintree_Customer':
+                if( isset($requestDetails->createdAt) ) $details->timestamp = $requestDetails->__get('createdAt');
+                break;
         }
 
-        $indicator = ($response->success === true) ? 'success' : 'failure';
+        if ($response->success === true) {
+            $indicator = 'success';
+            $paymentResponse = $this->_lib_method.'_'.$indicator;
+        }
+        else
+        {
+            $indicator = 'failure';
+            $paymentResponse = $this->_lib_method.'_gateway_'.$indicator;
+        }
+
 
         return Payment_Response::instance()->gateway_response(
             $indicator,
-            $this->_lib_method.'_'.$indicator,
+            $paymentResponse,
             $details
         );
     }
