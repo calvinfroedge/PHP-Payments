@@ -367,22 +367,29 @@ class Braintree_Driver extends Payment_Driver
         $requestDetails = null;
         foreach($response as $prop) {
             if(is_object($prop) && get_class($prop)==$this->_api)
-                $requestDetails = $prop;
+                $responseDetails = $prop;
         }
 
         $details = (object) array();
         $details->gateway_response = $response;
 
         $details->identifier = null;
-        if( isset($requestDetails->id) ) $details->identifier = $requestDetails->__get('id');
 
         switch ($this->_api) {
+            case 'Braintree_CreditCard':
+                if( isset($responseDetails->token) ) $details->identifier = $responseDetails->__get('token');
+                break;
             case 'Braintree_Transaction':
-                if( isset($requestDetails->processorResponseText) ) $details->reason = $requestDetails->__get('processorResponseText');
+                if( isset($responseDetails->processorResponseText) ) $details->reason = $responseDetails->__get('processorResponseText');
             case 'Braintree_Customer':
-                if( isset($requestDetails->createdAt) ) $details->timestamp = $requestDetails->__get('createdAt');
+            case 'Braintree_Subscription':
+            default:
+                if( isset($responseDetails->id) ) $details->identifier = $responseDetails->__get('id');
                 break;
         }
+
+        if( isset($responseDetails->createdAt) ) $details->timestamp = $responseDetails->__get('createdAt');
+
 
         if ($response->success === true) {
             $indicator = 'success';

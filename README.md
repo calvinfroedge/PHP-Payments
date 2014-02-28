@@ -121,6 +121,18 @@ $params = array(
 Note: if the trial period is disabled for the given plan, the trial parameters will be ignored.
 
 
+Cancel a plan subscription:
+
+```php
+$params = array(
+    'identifier'    =>	'id'  //The id of the subscription to be canceled
+);
+
+$response = $payments->cancel_recurring_profile('braintree', $params);
+```
+
+
+
 ### Testing ###
 
 * no testing was implemented for these methods*
