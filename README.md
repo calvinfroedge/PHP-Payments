@@ -1,5 +1,3 @@
-## This code has taken tons of work.  Donations highly appreciated.  [Make a Donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TJMWX5E9GXS7S "Make a Donation to Codeigniter Payments")
-
 # PHP Payments
 
 ## NOTICE - USING PHP-PAYMENTS ALONE DOES NOT MAKE YOU PCI COMPLIANT
