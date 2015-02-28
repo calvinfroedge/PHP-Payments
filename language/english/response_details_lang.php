@@ -32,6 +32,8 @@ $lang = array (
 	'missing_first_name' 		=>  'First name is required but was not provided in the request',
 	'missing_last_name'			=>  'Last name is required but was not provided in the request',
 	'missing_currency_code'		=> 	'Currency is required but was not provided in the request',
+	'missing_token'				=> 	'Token is required but was not provided in the request',
+	'missing_payer_id'			=> 	'Payer Identifier is required but was not provided in the request',
 	'no_details'				=> 	'No further details provided',
 	'is_not_a_param'			=>  'Is not a valid parameter for this method',
 );
